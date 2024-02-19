@@ -2,7 +2,7 @@
 
 namespace Entities.Concretes;
 
-public class Applicant : BaseEntity<int>
+public class Applicant : User
 {
     public string About { get; set; }
     public Applicant()
@@ -10,16 +10,8 @@ public class Applicant : BaseEntity<int>
 
     }
 
-    public Applicant(int id, string userName, string firstName, string lastName, DateTime dateOfBirth, string nationalIdentity, string email, string password, string about)
+    public Applicant(string about)
     {
-        Id = id;
-        UserName = userName;
-        FirstName = firstName;
-        LastName = lastName;
-        DateOfBirth = dateOfBirth;
-        NationalIdentity = nationalIdentity;
-        Email = email;
-        Password = password;
         About = about;
     }
 }
