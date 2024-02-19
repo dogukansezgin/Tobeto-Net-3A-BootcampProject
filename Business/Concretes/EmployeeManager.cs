@@ -2,10 +2,11 @@
 using Business.Responses.Employees;
 using DataAccess.Abstracts;
 using Entities.Concretes;
+using Business.Abstracts;
 
 namespace Business.Concretes;
 
-public class EmployeeManager
+public class EmployeeManager : IEmployeeService
 {
     private readonly IEmployeeRepository _employeeRepository;
 

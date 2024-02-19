@@ -2,10 +2,11 @@
 using Business.Responses.Applicants;
 using DataAccess.Abstracts;
 using Entities.Concretes;
+using Business.Abstracts;
 
 namespace Business.Concretes;
 
-public class ApplicantManager
+public class ApplicantManager : IApplicantService
 {
     private readonly IApplicantRepository _applicantRepository;
 
