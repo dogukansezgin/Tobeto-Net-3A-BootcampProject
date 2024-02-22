@@ -5,6 +5,7 @@ using Business.Responses.Bootcamps;
 using DataAccess.Abstracts;
 using DataAccess.Concretes.Repositories;
 using Entities.Concretes;
+using Microsoft.EntityFrameworkCore;
 
 namespace Business.Concretes;
 
@@ -39,14 +40,14 @@ public class BootcampManager : IBootcampService
 
     public List<GetAllBootcampResponse> GetAll()
     {
-        List<Bootcamp> bootcamps = _bootcampRepository.GetAll();
+        List<Bootcamp> bootcamps = _bootcampRepository.GetAll(include: x => x.Include(x => x.Instructor).Include(x => x.BootcampState));
         List<GetAllBootcampResponse> responses = _mapper.Map<List<GetAllBootcampResponse>>(bootcamps);
         return responses;
     }
 
     public GetByIdBootcampResponse GetById(int id)
     {
-        Bootcamp bootcamp = _bootcampRepository.Get(x => x.Id == id);
+        Bootcamp bootcamp = _bootcampRepository.Get(x => x.Id == id, include: x => x.Include(x => x.Instructor).Include(x => x.BootcampState));
         GetByIdBootcampResponse response = _mapper.Map<GetByIdBootcampResponse>(bootcamp);
         return response;
     }

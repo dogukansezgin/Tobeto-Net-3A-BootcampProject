@@ -4,6 +4,7 @@ using Business.Requests.Applications;
 using Business.Responses.Applications;
 using DataAccess.Abstracts;
 using Entities.Concretes;
+using Microsoft.EntityFrameworkCore;
 
 namespace Business.Concretes;
 
@@ -38,14 +39,14 @@ public class ApplicationManager : IApplicationService
 
     public List<GetAllApplicationResponse> GetAll()
     {
-        List<Application> applications = _applicationRepository.GetAll();
+        List<Application> applications = _applicationRepository.GetAll(include: x => x.Include(x => x.Applicant).Include(x => x.ApplicationState).Include(x => x.Bootcamp));
         List<GetAllApplicationResponse> responses = _mapper.Map<List<GetAllApplicationResponse>>(applications);
         return responses;
     }
 
     public GetByIdApplicationResponse GetById(int id)
     {
-        Application application = _applicationRepository.Get(x => x.Id == id);
+        Application application = _applicationRepository.Get(x => x.Id == id, include: x => x.Include(x => x.Applicant).Include(x => x.ApplicationState).Include(x => x.Bootcamp));
         GetByIdApplicationResponse response = _mapper.Map<GetByIdApplicationResponse>(application);
         return response;
     }
