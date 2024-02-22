@@ -37,15 +37,15 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetAll() 
+        public List<GetAllUserResponse> GetAll() 
         {
-            return Ok(_userService.GetAll());
+            return _userService.GetAll();
         }
 
         [HttpGet("{id}")]
-        public IActionResult GetById(int id)
+        public GetByIdUserResponse GetById(int id)
         {
-            return Ok(_userService.GetById(id));
+            return _userService.GetById(id);
         }
     }
 }

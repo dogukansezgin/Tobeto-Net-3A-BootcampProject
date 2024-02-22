@@ -1,4 +1,5 @@
-﻿using Business.Abstracts;
+﻿using AutoMapper;
+using Business.Abstracts;
 using Business.Requests.Instructors;
 using Business.Responses.Instructors;
 using DataAccess.Abstracts;
@@ -9,85 +10,43 @@ namespace Business.Concretes;
 public class InstructorManager : IInstructorService
 {
     private readonly IInstructorRepository _instructorRepository;
+    private readonly IMapper _mapper;
 
-    public InstructorManager(IInstructorRepository instructorRepository)
+    public InstructorManager(IInstructorRepository instructorRepository, IMapper mapper)
     {
         _instructorRepository = instructorRepository;
+        _mapper = mapper;
     }
 
     public CreateInstructorResponse Add(CreateInstructorRequest request)
     {
-        Instructor instructor = new Instructor();
-        instructor.UserName = request.UserName;
-        instructor.FirstName = request.FirstName;
-        instructor.LastName = request.LastName;
-        instructor.CompanyName = request.CompanyName;
-        instructor.DateOfBirth = request.DateOfBirth;
-        instructor.NationalIdentity = request.NationalIdentity;
-        instructor.Email = request.Email;
-        instructor.Password = request.Password;
+        Instructor instructor = _mapper.Map<Instructor>(request);
         _instructorRepository.Add(instructor);
 
-        CreateInstructorResponse response = new CreateInstructorResponse();
-        response.Id = instructor.Id;
-        response.UserName = instructor.UserName;
-        response.CompanyName = instructor.CompanyName;
-        response.CreatedDate = instructor.CreatedDate;
+        CreateInstructorResponse response = _mapper.Map<CreateInstructorResponse>(instructor);
         return response;
     }
 
     public DeleteInstructorResponse Delete(DeleteInstructorRequest request)
     {
-        Instructor instructor = new Instructor()
-        { Id = request.Id, UserName = request.UserName };
+        Instructor instructor = _mapper.Map<Instructor>(request);
         _instructorRepository.Delete(instructor);
 
-        DeleteInstructorResponse response = new DeleteInstructorResponse();
-        response.Id = instructor.Id;
-        response.UserName = instructor.UserName;
+        DeleteInstructorResponse response = _mapper.Map<DeleteInstructorResponse>(instructor);
         return response;
     }
 
     public List<GetAllInstructorResponse> GetAll()
     {
-        List<GetAllInstructorResponse> instructors = new();
-
-        foreach (var instructor in _instructorRepository.GetAll())
-        {
-            GetAllInstructorResponse response = new();
-            response.Id = instructor.Id;
-            response.UserName = instructor.UserName;
-            response.FirstName = instructor.FirstName;
-            response.LastName = instructor.LastName;
-            response.CompanyName = instructor.CompanyName;
-            response.DateOfBirth = instructor.DateOfBirth;
-            response.NationalIdentity = instructor.NationalIdentity;
-            response.Email = instructor.Email;
-            response.Password = instructor.Password;
-            response.CreatedDate = instructor.CreatedDate;
-            response.DeletedDate = instructor.DeletedDate;
-            response.UpdatedDate = instructor.UpdatedDate;
-            instructors.Add(response);
-        }
-        return instructors;
+        List<Instructor> instructors = _instructorRepository.GetAll();
+        List<GetAllInstructorResponse> responses = _mapper.Map<List<GetAllInstructorResponse>>(instructors);
+        return responses;
     }
 
     public GetByIdInstructorResponse GetById(int id)
     {
-        GetByIdInstructorResponse response = new();
         Instructor instructor = _instructorRepository.Get(x => x.Id == id);
-        response.Id = instructor.Id;
-        response.UserName = instructor.UserName;
-        response.FirstName = instructor.FirstName;
-        response.LastName = instructor.LastName;
-        response.CompanyName = instructor.CompanyName;
-        response.DateOfBirth = instructor.DateOfBirth;
-        response.NationalIdentity = instructor.NationalIdentity;
-        response.Email = instructor.Email;
-        response.Password = instructor.Password;
-        response.CreatedDate = instructor.CreatedDate;
-        response.DeletedDate = instructor.DeletedDate;
-        response.UpdatedDate = instructor.UpdatedDate;
+        GetByIdInstructorResponse response = _mapper.Map<GetByIdInstructorResponse>(instructor);
         return response;
     }
 
@@ -105,16 +64,7 @@ public class InstructorManager : IInstructorService
         instructor.UpdatedDate = DateTime.UtcNow;
         _instructorRepository.Update(instructor);
 
-        UpdateInstructorResponse response = new();
-        response.UserName = instructor.UserName;
-        response.FirstName = instructor.FirstName;
-        response.LastName = instructor.LastName;
-        response.CompanyName = instructor.CompanyName;
-        response.DateOfBirth = instructor.DateOfBirth;
-        response.NationalIdentity = instructor.NationalIdentity;
-        response.Email = instructor.Email;
-        response.Password = instructor.Password;
-        response.UpdatedDate = (DateTime)instructor.UpdatedDate;
+        UpdateInstructorResponse response = _mapper.Map<UpdateInstructorResponse>(instructor);
         return response;
     }
 }

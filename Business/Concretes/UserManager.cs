@@ -3,88 +3,50 @@ using Entities.Concretes;
 using DataAccess.Abstracts;
 using Business.Requests.Users;
 using Business.Responses.Users;
+using AutoMapper;
 
 namespace Business.Concretes;
 
 public class UserManager : IUserService
 {
     private readonly IUserRepository _userRepository;
+    private readonly IMapper _mapper;
 
-    public UserManager(IUserRepository userRepository)
+    public UserManager(IUserRepository userRepository, IMapper mapper)
     {
         _userRepository = userRepository;
+        _mapper = mapper;
     }
 
     public CreateUserResponse Add(CreateUserRequest request)
     {
-        User user = new User();
-        user.UserName = request.UserName;
-        user.FirstName = request.FirstName;
-        user.LastName = request.LastName;
-        user.DateOfBirth = request.DateOfBirth;
-        user.NationalIdentity = request.NationalIdentity;
-        user.Email = request.Email;
-        user.Password = request.Password;
+        User user = _mapper.Map<User>(request);
         _userRepository.Add(user);
 
-        CreateUserResponse response = new CreateUserResponse();
-        response.Id = user.Id;
-        response.UserName = user.UserName;
-        response.Email = user.Email;
-        response.CreatedDate = user.CreatedDate;
+        CreateUserResponse response = _mapper.Map<CreateUserResponse>(user);
         return response;
     }
 
     public DeleteUserResponse Delete(DeleteUserRequest request)
     {
-        User user = new User() 
-        { Id = request.Id, UserName = request.UserName};
+        User user = _mapper.Map<User>(request);
         _userRepository.Delete(user);
 
-        DeleteUserResponse response = new DeleteUserResponse();
-        response.Id = user.Id;
-        response.UserName = user.UserName;
+        DeleteUserResponse response = _mapper.Map<DeleteUserResponse>(user);
         return response;
     }
 
     public List<GetAllUserResponse> GetAll()
     {
-        List<GetAllUserResponse> users = new();
-
-        foreach (var user in _userRepository.GetAll())
-        {
-            GetAllUserResponse response = new();
-            response.Id = user.Id;
-            response.UserName = user.UserName;
-            response.FirstName = user.FirstName;
-            response.LastName = user.LastName;
-            response.DateOfBirth = user.DateOfBirth;
-            response.NationalIdentity = user.NationalIdentity;
-            response.Email = user.Email;
-            response.Password = user.Password;
-            response.CreatedDate = user.CreatedDate;
-            response.DeletedDate = user.DeletedDate;
-            response.UpdatedDate = user.UpdatedDate;
-            users.Add(response);
-        }
-        return users;
+        List<User> users = _userRepository.GetAll();
+        List<GetAllUserResponse> responses = _mapper.Map<List<GetAllUserResponse>>(users);
+        return responses;
     }
 
     public GetByIdUserResponse GetById(int id)
     {
-        GetByIdUserResponse response = new();
         User user = _userRepository.Get(x => x.Id == id);
-        response.Id = user.Id;
-        response.UserName = user.UserName;
-        response.FirstName = user.FirstName;
-        response.LastName = user.LastName;
-        response.DateOfBirth = user.DateOfBirth;
-        response.NationalIdentity = user.NationalIdentity;
-        response.Email = user.Email;
-        response.Password = user.Password;
-        response.CreatedDate = user.CreatedDate;
-        response.DeletedDate = user.DeletedDate;
-        response.UpdatedDate = user.UpdatedDate;
+        GetByIdUserResponse response = _mapper.Map<GetByIdUserResponse>(user);
         return response;
     }
 
@@ -101,15 +63,7 @@ public class UserManager : IUserService
         user.UpdatedDate = DateTime.UtcNow;
         _userRepository.Update(user);
 
-        UpdateUserResponse response = new();
-        response.UserName = user.UserName;
-        response.FirstName = user.FirstName;
-        response.LastName = user.LastName;
-        response.DateOfBirth = user.DateOfBirth;
-        response.NationalIdentity = user.NationalIdentity;
-        response.Email = user.Email;
-        response.Password = user.Password;
-        response.UpdatedDate = (DateTime)user.UpdatedDate;
+        UpdateUserResponse response = _mapper.Map<UpdateUserResponse>(user);
         return response;
     }
 }

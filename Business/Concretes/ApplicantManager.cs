@@ -3,91 +3,50 @@ using Business.Responses.Applicants;
 using DataAccess.Abstracts;
 using Entities.Concretes;
 using Business.Abstracts;
+using AutoMapper;
 
 namespace Business.Concretes;
 
 public class ApplicantManager : IApplicantService
 {
     private readonly IApplicantRepository _applicantRepository;
+    private readonly IMapper _mapper;
 
-    public ApplicantManager(IApplicantRepository applicantRepository)
+    public ApplicantManager(IApplicantRepository applicantRepository, IMapper mapper)
     {
         _applicantRepository = applicantRepository;
+        _mapper = mapper;
     }
 
     public CreateApplicantResponse Add(CreateApplicantRequest request)
     {
-        Applicant applicant = new Applicant();
-        applicant.UserName = request.UserName;
-        applicant.FirstName = request.FirstName;
-        applicant.LastName = request.LastName;
-        applicant.About = request.About;
-        applicant.DateOfBirth = request.DateOfBirth;
-        applicant.NationalIdentity = request.NationalIdentity;
-        applicant.Email = request.Email;
-        applicant.Password = request.Password;
+        Applicant applicant = _mapper.Map<Applicant>(request);
         _applicantRepository.Add(applicant);
 
-        CreateApplicantResponse response = new CreateApplicantResponse();
-        response.Id = applicant.Id;
-        response.UserName = applicant.UserName;
-        response.About = applicant.About;
-        response.CreatedDate = applicant.CreatedDate;
+        CreateApplicantResponse response = _mapper.Map<CreateApplicantResponse>(applicant);
         return response;
     }
 
     public DeleteApplicantResponse Delete(DeleteApplicantRequest request)
     {
-        Applicant applicant = new Applicant()
-        { Id = request.Id, UserName = request.UserName };
+        Applicant applicant = _mapper.Map<Applicant>(request);
         _applicantRepository.Delete(applicant);
 
-        DeleteApplicantResponse response = new DeleteApplicantResponse();
-        response.Id = applicant.Id;
-        response.UserName = applicant.UserName;
+        DeleteApplicantResponse response = _mapper.Map<DeleteApplicantResponse>(applicant);
         return response;
     }
 
     public List<GetAllApplicantResponse> GetAll()
     {
-        List<GetAllApplicantResponse> applicants = new();
-
-        foreach (var applicant in _applicantRepository.GetAll())
-        {
-            GetAllApplicantResponse response = new();
-            response.Id = applicant.Id;
-            response.UserName = applicant.UserName;
-            response.FirstName = applicant.FirstName;
-            response.LastName = applicant.LastName;
-            response.About = applicant.About;
-            response.DateOfBirth = applicant.DateOfBirth;
-            response.NationalIdentity = applicant.NationalIdentity;
-            response.Email = applicant.Email;
-            response.Password = applicant.Password;
-            response.CreatedDate = applicant.CreatedDate;
-            response.DeletedDate = applicant.DeletedDate;
-            response.UpdatedDate = applicant.UpdatedDate;
-            applicants.Add(response);
-        }
-        return applicants;
+        List<Applicant> applicants = _applicantRepository.GetAll();
+        List<GetAllApplicantResponse> responses = _mapper.Map<List<GetAllApplicantResponse>>(applicants);
+        return responses;
     }
 
     public GetByIdApplicantResponse GetById(int id)
     {
-        GetByIdApplicantResponse response = new();
         Applicant applicant = _applicantRepository.Get(x => x.Id == id);
-        response.Id = applicant.Id;
-        response.UserName = applicant.UserName;
-        response.FirstName = applicant.FirstName;
-        response.LastName = applicant.LastName;
-        response.About = applicant.About;
-        response.DateOfBirth = applicant.DateOfBirth;
-        response.NationalIdentity = applicant.NationalIdentity;
-        response.Email = applicant.Email;
-        response.Password = applicant.Password;
-        response.CreatedDate = applicant.CreatedDate;
-        response.DeletedDate = applicant.DeletedDate;
-        response.UpdatedDate = applicant.UpdatedDate;
+        GetByIdApplicantResponse response = _mapper.Map<GetByIdApplicantResponse>(applicant);
         return response;
     }
 
@@ -105,16 +64,7 @@ public class ApplicantManager : IApplicantService
         applicant.UpdatedDate = DateTime.UtcNow;
         _applicantRepository.Update(applicant);
 
-        UpdateApplicantResponse response = new();
-        response.UserName = applicant.UserName;
-        response.FirstName = applicant.FirstName;
-        response.LastName = applicant.LastName;
-        response.About = applicant.About;
-        response.DateOfBirth = applicant.DateOfBirth;
-        response.NationalIdentity = applicant.NationalIdentity;
-        response.Email = applicant.Email;
-        response.Password = applicant.Password;
-        response.UpdatedDate = (DateTime)applicant.UpdatedDate;
+        UpdateApplicantResponse response = _mapper.Map<UpdateApplicantResponse>(applicant);
         return response;
     }
 }

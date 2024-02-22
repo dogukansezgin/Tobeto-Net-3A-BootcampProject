@@ -3,91 +3,50 @@ using Business.Responses.Employees;
 using DataAccess.Abstracts;
 using Entities.Concretes;
 using Business.Abstracts;
+using AutoMapper;
 
 namespace Business.Concretes;
 
 public class EmployeeManager : IEmployeeService
 {
     private readonly IEmployeeRepository _employeeRepository;
+    private readonly IMapper _mapper;
 
-    public EmployeeManager(IEmployeeRepository employeeRepository)
+    public EmployeeManager(IEmployeeRepository employeeRepository, IMapper mapper)
     {
         _employeeRepository = employeeRepository;
+        _mapper = mapper;
     }
 
     public CreateEmployeeResponse Add(CreateEmployeeRequest request)
     {
-        Employee employee = new Employee();
-        employee.UserName = request.UserName;
-        employee.FirstName = request.FirstName;
-        employee.LastName = request.LastName;
-        employee.Position = request.Position;
-        employee.DateOfBirth = request.DateOfBirth;
-        employee.NationalIdentity = request.NationalIdentity;
-        employee.Email = request.Email;
-        employee.Password = request.Password;
+        Employee employee = _mapper.Map<Employee>(request);
         _employeeRepository.Add(employee);
 
-        CreateEmployeeResponse response = new CreateEmployeeResponse();
-        response.Id = employee.Id;
-        response.UserName = employee.UserName;
-        response.Position = employee.Position;
-        response.CreatedDate = employee.CreatedDate;
+        CreateEmployeeResponse response = _mapper.Map<CreateEmployeeResponse>(employee);
         return response;
     }
 
     public DeleteEmployeeResponse Delete(DeleteEmployeeRequest request)
     {
-        Employee employee = new Employee()
-        { Id = request.Id, UserName = request.UserName };
+        Employee employee = _mapper.Map<Employee>(request);
         _employeeRepository.Delete(employee);
 
-        DeleteEmployeeResponse response = new DeleteEmployeeResponse();
-        response.Id = employee.Id;
-        response.UserName = employee.UserName;
+        DeleteEmployeeResponse response = _mapper.Map<DeleteEmployeeResponse>(employee);
         return response;
     }
 
     public List<GetAllEmployeeResponse> GetAll()
     {
-        List<GetAllEmployeeResponse> employees = new();
-
-        foreach (var employee in _employeeRepository.GetAll())
-        {
-            GetAllEmployeeResponse response = new();
-            response.Id = employee.Id;
-            response.UserName = employee.UserName;
-            response.FirstName = employee.FirstName;
-            response.LastName = employee.LastName;
-            response.Position = employee.Position;
-            response.DateOfBirth = employee.DateOfBirth;
-            response.NationalIdentity = employee.NationalIdentity;
-            response.Email = employee.Email;
-            response.Password = employee.Password;
-            response.CreatedDate = employee.CreatedDate;
-            response.DeletedDate = employee.DeletedDate;
-            response.UpdatedDate = employee.UpdatedDate;
-            employees.Add(response);
-        }
-        return employees;
+        List<Employee> employees = _employeeRepository.GetAll();
+        List<GetAllEmployeeResponse> responses = _mapper.Map<List<GetAllEmployeeResponse>>(employees);
+        return responses;
     }
 
     public GetByIdEmployeeResponse GetById(int id)
     {
-        GetByIdEmployeeResponse response = new();
         Employee employee = _employeeRepository.Get(x => x.Id == id);
-        response.Id = employee.Id;
-        response.UserName = employee.UserName;
-        response.FirstName = employee.FirstName;
-        response.LastName = employee.LastName;
-        response.Position = employee.Position;
-        response.DateOfBirth = employee.DateOfBirth;
-        response.NationalIdentity = employee.NationalIdentity;
-        response.Email = employee.Email;
-        response.Password = employee.Password;
-        response.CreatedDate = employee.CreatedDate;
-        response.DeletedDate = employee.DeletedDate;
-        response.UpdatedDate = employee.UpdatedDate;
+        GetByIdEmployeeResponse response = _mapper.Map<GetByIdEmployeeResponse>(employee);
         return response;
     }
 
@@ -105,16 +64,7 @@ public class EmployeeManager : IEmployeeService
         employee.UpdatedDate = DateTime.UtcNow;
         _employeeRepository.Update(employee);
 
-        UpdateEmployeeResponse response = new();
-        response.UserName = employee.UserName;
-        response.FirstName = employee.FirstName;
-        response.LastName = employee.LastName;
-        response.Position = employee.Position;
-        response.DateOfBirth = employee.DateOfBirth;
-        response.NationalIdentity = employee.NationalIdentity;
-        response.Email = employee.Email;
-        response.Password = employee.Password;
-        response.UpdatedDate = (DateTime)employee.UpdatedDate;
+        UpdateEmployeeResponse response = _mapper.Map<UpdateEmployeeResponse>(employee);
         return response;
     }
 }
