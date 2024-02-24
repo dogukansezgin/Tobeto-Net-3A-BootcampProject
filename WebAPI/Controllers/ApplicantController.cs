@@ -8,7 +8,7 @@ namespace WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ApplicantController : ControllerBase
+    public class ApplicantController : BaseController
     {
         private readonly IApplicantService _applicantService;
 
@@ -18,33 +18,33 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost]
-        public CreateApplicantResponse Add(CreateApplicantRequest request)
+        public IActionResult Add(CreateApplicantRequest request)
         {
-            return _applicantService.Add(request);
+            return HandleDataResult(_applicantService.Add(request));
         }
 
         [HttpDelete]
-        public DeleteApplicantResponse Delete(DeleteApplicantRequest request)
+        public IActionResult Delete(DeleteApplicantRequest request)
         {
-            return _applicantService.Delete(request);
+            return HandleDataResult(_applicantService.Delete(request));
         }
 
         [HttpPut]
-        public UpdateApplicantResponse Update(UpdateApplicantRequest request)
+        public IActionResult Update(UpdateApplicantRequest request)
         {
-            return _applicantService.Update(request);
+            return HandleDataResult(_applicantService.Update(request));
         }
 
         [HttpGet]
-        public List<GetAllApplicantResponse> GetAll()
+        public IActionResult GetAll()
         {
-            return _applicantService.GetAll();
+            return HandleDataResult(_applicantService.GetAll());
         }
 
         [HttpGet("{id}")]
-        public GetByIdApplicantResponse GetById(int id)
+        public IActionResult GetById(int id)
         {
-            return _applicantService.GetById(id);
+            return HandleDataResult(_applicantService.GetById(id));
         }
     }
 }

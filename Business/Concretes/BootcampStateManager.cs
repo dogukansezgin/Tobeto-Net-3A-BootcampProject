@@ -2,8 +2,8 @@
 using Business.Abstracts;
 using Business.Requests.BootcampStates;
 using Business.Responses.BootcampStates;
+using Core.Utilities.Results;
 using DataAccess.Abstracts;
-using DataAccess.Concretes.Repositories;
 using Entities.Concretes;
 
 namespace Business.Concretes;
@@ -18,39 +18,39 @@ public class BootcampStateManager : IBootcampStateService
         _bootcampStateRepository = bootcampStateRepository;
         _mapper = mapper;
     }
-    public CreateBootcampStateResponse Add(CreateBootcampStateRequest request)
+    public IDataResult<CreateBootcampStateResponse> Add(CreateBootcampStateRequest request)
     {
         BootcampState bootcampState = _mapper.Map<BootcampState>(request);
         _bootcampStateRepository.Add(bootcampState);
 
         CreateBootcampStateResponse response = _mapper.Map<CreateBootcampStateResponse>(bootcampState);
-        return response;
+        return new SuccessDataResult<CreateBootcampStateResponse>(response, "Added Succesfully");
     }
 
-    public DeleteBootcampStateResponse Delete(DeleteBootcampStateRequest request)
+    public IDataResult<DeleteBootcampStateResponse> Delete(DeleteBootcampStateRequest request)
     {
         BootcampState bootcampState = _mapper.Map<BootcampState>(request);
         _bootcampStateRepository.Delete(bootcampState);
 
         DeleteBootcampStateResponse response = _mapper.Map<DeleteBootcampStateResponse>(bootcampState);
-        return response;
+        return new SuccessDataResult<DeleteBootcampStateResponse>(response, "Deleted Succesfully");
     }
 
-    public List<GetAllBootcampStateResponse> GetAll()
+    public IDataResult<List<GetAllBootcampStateResponse>> GetAll()
     {
         List<BootcampState> bootcampState = _bootcampStateRepository.GetAll();
         List<GetAllBootcampStateResponse> responses = _mapper.Map<List<GetAllBootcampStateResponse>>(bootcampState);
-        return responses;
+        return new SuccessDataResult<List<GetAllBootcampStateResponse>>(responses, "Listed Succesfully");
     }
 
-    public GetByIdBootcampStateResponse GetById(int id)
+    public IDataResult<GetByIdBootcampStateResponse> GetById(int id)
     {
         BootcampState bootcampState = _bootcampStateRepository.Get(x => x.Id == id);
         GetByIdBootcampStateResponse response = _mapper.Map<GetByIdBootcampStateResponse>(bootcampState);
-        return response;
+        return new SuccessDataResult<GetByIdBootcampStateResponse>(response, "Listed Succesfully");
     }
 
-    public UpdateBootcampStateResponse Update(UpdateBootcampStateRequest request)
+    public IDataResult<UpdateBootcampStateResponse> Update(UpdateBootcampStateRequest request)
     {
         BootcampState bootcampState = _bootcampStateRepository.Get(u => u.Id == request.Id);
         bootcampState.Name = request.Name ?? bootcampState.Name;
@@ -58,6 +58,6 @@ public class BootcampStateManager : IBootcampStateService
         _bootcampStateRepository.Update(bootcampState);
 
         UpdateBootcampStateResponse response = _mapper.Map<UpdateBootcampStateResponse>(bootcampState);
-        return response;
+        return new SuccessDataResult<UpdateBootcampStateResponse>(response, "Updated Succesfully");
     }
 }

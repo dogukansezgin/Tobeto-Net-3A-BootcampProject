@@ -8,7 +8,7 @@ namespace WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ApplicationStateController : ControllerBase
+    public class ApplicationStateController : BaseController
     {
         private readonly IApplicationStateService _applicationStateService;
 
@@ -18,33 +18,33 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost]
-        public CreateApplicationStateResponse Add(CreateApplicationStateRequest request)
+        public IActionResult Add(CreateApplicationStateRequest request)
         {
-            return _applicationStateService.Add(request);
+            return HandleDataResult(_applicationStateService.Add(request));
         }
 
         [HttpDelete]
-        public DeleteApplicationStateResponse Delete(DeleteApplicationStateRequest request)
+        public IActionResult Delete(DeleteApplicationStateRequest request)
         {
-            return _applicationStateService.Delete(request);
+            return HandleDataResult(_applicationStateService.Delete(request));
         }
 
         [HttpPut]
-        public UpdateApplicationStateResponse Update(UpdateApplicationStateRequest request)
+        public IActionResult Update(UpdateApplicationStateRequest request)
         {
-            return _applicationStateService.Update(request);
+            return HandleDataResult(_applicationStateService.Update(request));
         }
 
         [HttpGet]
-        public List<GetAllApplicationStateResponse> GetAll()
+        public IActionResult GetAll()
         {
-            return _applicationStateService.GetAll();
+            return HandleDataResult(_applicationStateService.GetAll());
         }
 
         [HttpGet("{id}")]
-        public GetByIdApplicationStateResponse GetById(int id)
+        public IActionResult GetById(int id)
         {
-            return _applicationStateService.GetById(id);
+            return HandleDataResult(_applicationStateService.GetById(id));
         }
     }
 }

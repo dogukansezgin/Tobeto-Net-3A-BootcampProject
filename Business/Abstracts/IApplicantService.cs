@@ -1,13 +1,14 @@
 ﻿using Business.Requests.Applicants;
 using Business.Responses.Applicants;
+using Core.Utilities.Results;
 
 namespace Business.Abstracts;
 
 public interface IApplicantService
 {
-    CreateApplicantResponse Add(CreateApplicantRequest request);
-    DeleteApplicantResponse Delete(DeleteApplicantRequest request);
-    UpdateApplicantResponse Update(UpdateApplicantRequest request);
-    GetByIdApplicantResponse GetById(int id);
-    List<GetAllApplicantResponse> GetAll();
+    IDataResult<CreateApplicantResponse> Add(CreateApplicantRequest request);
+    IDataResult<DeleteApplicantResponse> Delete(DeleteApplicantRequest request);
+    IDataResult<UpdateApplicantResponse> Update(UpdateApplicantRequest request);
+    IDataResult<GetByIdApplicantResponse> GetById(int id);
+    IDataResult<List<GetAllApplicantResponse>> GetAll();
 }

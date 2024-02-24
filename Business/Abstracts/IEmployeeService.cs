@@ -1,13 +1,14 @@
 ﻿using Business.Requests.Employees;
 using Business.Responses.Employees;
+using Core.Utilities.Results;
 
 namespace Business.Abstracts;
 
 public interface IEmployeeService
 {
-    CreateEmployeeResponse Add(CreateEmployeeRequest request);
-    DeleteEmployeeResponse Delete(DeleteEmployeeRequest request);
-    UpdateEmployeeResponse Update(UpdateEmployeeRequest request);
-    GetByIdEmployeeResponse GetById(int id);
-    List<GetAllEmployeeResponse> GetAll();
+    IDataResult<CreateEmployeeResponse> Add(CreateEmployeeRequest request);
+    IDataResult<DeleteEmployeeResponse> Delete(DeleteEmployeeRequest request);
+    IDataResult<UpdateEmployeeResponse> Update(UpdateEmployeeRequest request);
+    IDataResult<GetByIdEmployeeResponse> GetById(int id);
+    IDataResult<List<GetAllEmployeeResponse>> GetAll();
 }

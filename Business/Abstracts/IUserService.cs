@@ -1,14 +1,14 @@
 ﻿using Business.Requests.Users;
 using Business.Responses.Users;
-using Entities.Concretes;
+using Core.Utilities.Results;
 
 namespace Business.Abstracts;
 
 public interface IUserService
 {
-    CreateUserResponse Add(CreateUserRequest request);
-    DeleteUserResponse Delete(DeleteUserRequest request);
-    UpdateUserResponse Update(UpdateUserRequest request);
-    GetByIdUserResponse GetById(int id);
-    List<GetAllUserResponse> GetAll();
+    IDataResult<CreateUserResponse> Add(CreateUserRequest request);
+    IDataResult<DeleteUserResponse> Delete(DeleteUserRequest request);
+    IDataResult<UpdateUserResponse> Update(UpdateUserRequest request);
+    IDataResult<GetByIdUserResponse> GetById(int id);
+    IDataResult<List<GetAllUserResponse>> GetAll();
 }

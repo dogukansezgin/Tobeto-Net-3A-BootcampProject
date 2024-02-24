@@ -12,6 +12,10 @@ public class BaseDbContext : DbContext
     public DbSet<Instructor> Instructors { get; set; }
     public DbSet<Employee> Employees { get; set; }
     public DbSet<Applicant> Applicants { get; set; }
+    public DbSet<Application> Applications { get; set; }
+    public DbSet<ApplicationState> ApplicationStates { get; set; }
+    public DbSet<Bootcamp> Bootcamp { get; set; }
+    public DbSet<BootcampState> BootcampStates { get; set; }
 
     public BaseDbContext(DbContextOptions dbContextOptions, IConfiguration configuration) : base(dbContextOptions)
     {

@@ -4,6 +4,7 @@ using DataAccess.Abstracts;
 using Entities.Concretes;
 using Business.Abstracts;
 using AutoMapper;
+using Core.Utilities.Results;
 
 namespace Business.Concretes;
 
@@ -18,39 +19,39 @@ public class ApplicantManager : IApplicantService
         _mapper = mapper;
     }
 
-    public CreateApplicantResponse Add(CreateApplicantRequest request)
+    public IDataResult<CreateApplicantResponse> Add(CreateApplicantRequest request)
     {
         Applicant applicant = _mapper.Map<Applicant>(request);
         _applicantRepository.Add(applicant);
 
         CreateApplicantResponse response = _mapper.Map<CreateApplicantResponse>(applicant);
-        return response;
+        return new SuccessDataResult<CreateApplicantResponse>(response, "Added Succesfully");
     }
 
-    public DeleteApplicantResponse Delete(DeleteApplicantRequest request)
+    public IDataResult<DeleteApplicantResponse> Delete(DeleteApplicantRequest request)
     {
         Applicant applicant = _mapper.Map<Applicant>(request);
         _applicantRepository.Delete(applicant);
 
         DeleteApplicantResponse response = _mapper.Map<DeleteApplicantResponse>(applicant);
-        return response;
+        return new SuccessDataResult<DeleteApplicantResponse>(response, "Deleted Succesfully");
     }
 
-    public List<GetAllApplicantResponse> GetAll()
+    public IDataResult<List<GetAllApplicantResponse>> GetAll()
     {
         List<Applicant> applicants = _applicantRepository.GetAll();
         List<GetAllApplicantResponse> responses = _mapper.Map<List<GetAllApplicantResponse>>(applicants);
-        return responses;
+        return new SuccessDataResult<List<GetAllApplicantResponse>>(responses, "Listed Succesfully");
     }
 
-    public GetByIdApplicantResponse GetById(int id)
+    public IDataResult<GetByIdApplicantResponse> GetById(int id)
     {
         Applicant applicant = _applicantRepository.Get(x => x.Id == id);
         GetByIdApplicantResponse response = _mapper.Map<GetByIdApplicantResponse>(applicant);
-        return response;
+        return new SuccessDataResult<GetByIdApplicantResponse>(response, "Listed Succesfully");
     }
 
-    public UpdateApplicantResponse Update(UpdateApplicantRequest request)
+    public IDataResult<UpdateApplicantResponse> Update(UpdateApplicantRequest request)
     {
         Applicant applicant = _applicantRepository.Get(u => u.Id == request.Id);
         applicant.UserName = request.UserName ?? applicant.UserName;
@@ -65,6 +66,6 @@ public class ApplicantManager : IApplicantService
         _applicantRepository.Update(applicant);
 
         UpdateApplicantResponse response = _mapper.Map<UpdateApplicantResponse>(applicant);
-        return response;
+        return new SuccessDataResult<UpdateApplicantResponse>(response, "Updated Succesfully");
     }
 }

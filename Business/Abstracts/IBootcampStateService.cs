@@ -1,13 +1,14 @@
 ﻿using Business.Requests.BootcampStates;
 using Business.Responses.BootcampStates;
+using Core.Utilities.Results;
 
 namespace Business.Abstracts;
 
 public interface IBootcampStateService
 {
-    CreateBootcampStateResponse Add(CreateBootcampStateRequest request);
-    DeleteBootcampStateResponse Delete(DeleteBootcampStateRequest request);
-    UpdateBootcampStateResponse Update(UpdateBootcampStateRequest request);
-    GetByIdBootcampStateResponse GetById(int id);
-    List<GetAllBootcampStateResponse> GetAll();
+    IDataResult<CreateBootcampStateResponse> Add(CreateBootcampStateRequest request);
+    IDataResult<DeleteBootcampStateResponse> Delete(DeleteBootcampStateRequest request);
+    IDataResult<UpdateBootcampStateResponse> Update(UpdateBootcampStateRequest request);
+    IDataResult<GetByIdBootcampStateResponse> GetById(int id);
+    IDataResult<List<GetAllBootcampStateResponse>> GetAll();
 }

@@ -8,7 +8,7 @@ namespace WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class BootcampController : ControllerBase
+    public class BootcampController : BaseController
     {
         private readonly IBootcampService _bootcampService;
 
@@ -16,34 +16,35 @@ namespace WebAPI.Controllers
         {
             _bootcampService = bootcampService;
         }
+
         [HttpPost]
-        public CreateBootcampResponse Add(CreateBootcampRequest request)
+        public IActionResult Add(CreateBootcampRequest request)
         {
-            return _bootcampService.Add(request);
+            return HandleDataResult(_bootcampService.Add(request));
         }
 
         [HttpDelete]
-        public DeleteBootcampResponse Delete(DeleteBootcampRequest request)
+        public IActionResult Delete(DeleteBootcampRequest request)
         {
-            return _bootcampService.Delete(request);
+            return HandleDataResult(_bootcampService.Delete(request));
         }
 
         [HttpPut]
-        public UpdateBootcampResponse Update(UpdateBootcampRequest request)
+        public IActionResult Update(UpdateBootcampRequest request)
         {
-            return _bootcampService.Update(request);
+            return HandleDataResult(_bootcampService.Update(request));
         }
 
         [HttpGet]
-        public List<GetAllBootcampResponse> GetAll()
+        public IActionResult GetAll()
         {
-            return _bootcampService.GetAll();
+            return HandleDataResult(_bootcampService.GetAll());
         }
 
         [HttpGet("{id}")]
-        public GetByIdBootcampResponse GetById(int id)
+        public IActionResult GetById(int id)
         {
-            return _bootcampService.GetById(id);
+            return HandleDataResult(_bootcampService.GetById(id));
         }
     }
 }

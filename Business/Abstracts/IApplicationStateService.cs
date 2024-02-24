@@ -1,13 +1,14 @@
 ﻿using Business.Requests.ApplicationStates;
 using Business.Responses.ApplicationStates;
+using Core.Utilities.Results;
 
 namespace Business.Abstracts;
 
 public interface IApplicationStateService
 {
-    CreateApplicationStateResponse Add(CreateApplicationStateRequest request);
-    DeleteApplicationStateResponse Delete(DeleteApplicationStateRequest request);
-    UpdateApplicationStateResponse Update(UpdateApplicationStateRequest request);
-    GetByIdApplicationStateResponse GetById(int id);
-    List<GetAllApplicationStateResponse> GetAll();
+    IDataResult<CreateApplicationStateResponse> Add(CreateApplicationStateRequest request);
+    IDataResult<DeleteApplicationStateResponse> Delete(DeleteApplicationStateRequest request);
+    IDataResult<UpdateApplicationStateResponse> Update(UpdateApplicationStateRequest request);
+    IDataResult<GetByIdApplicationStateResponse> GetById(int id);
+    IDataResult<List<GetAllApplicationStateResponse>> GetAll();
 }

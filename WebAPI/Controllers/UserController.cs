@@ -9,7 +9,7 @@ namespace WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UserController : ControllerBase
+    public class UserController : BaseController
     {
         private readonly IUserService _userService;
 
@@ -19,33 +19,33 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost]
-        public CreateUserResponse Add(CreateUserRequest request)
+        public IActionResult Add(CreateUserRequest request)
         {
-            return _userService.Add(request);
+            return HandleDataResult(_userService.Add(request));
         }
 
         [HttpDelete]
-        public DeleteUserResponse Delete(DeleteUserRequest request)
+        public IActionResult Delete(DeleteUserRequest request)
         {
-            return _userService.Delete(request);
+            return HandleDataResult(_userService.Delete(request));
         }
 
         [HttpPut]
-        public UpdateUserResponse Update(UpdateUserRequest request)
+        public IActionResult Update(UpdateUserRequest request)
         {
-            return _userService.Update(request);
+            return HandleDataResult(_userService.Update(request));
         }
 
         [HttpGet]
-        public List<GetAllUserResponse> GetAll() 
+        public IActionResult GetAll() 
         {
-            return _userService.GetAll();
+            return HandleDataResult(_userService.GetAll());
         }
 
         [HttpGet("{id}")]
-        public GetByIdUserResponse GetById(int id)
+        public IActionResult GetById(int id)
         {
-            return _userService.GetById(id);
+            return HandleDataResult(_userService.GetById(id));
         }
     }
 }

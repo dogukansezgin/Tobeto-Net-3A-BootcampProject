@@ -8,7 +8,7 @@ namespace WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class InstructorController : ControllerBase
+    public class InstructorController : BaseController
     {
         private readonly IInstructorService _instructorService;
 
@@ -18,33 +18,33 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost]
-        public CreateInstructorResponse Add(CreateInstructorRequest request)
+        public IActionResult Add(CreateInstructorRequest request)
         {
-            return _instructorService.Add(request);
+            return HandleDataResult(_instructorService.Add(request));
         }
 
         [HttpDelete]
-        public DeleteInstructorResponse Delete(DeleteInstructorRequest request)
+        public IActionResult Delete(DeleteInstructorRequest request)
         {
-            return _instructorService.Delete(request);
+            return HandleDataResult(_instructorService.Delete(request));
         }
 
         [HttpPut]
-        public UpdateInstructorResponse Update(UpdateInstructorRequest request)
+        public IActionResult Update(UpdateInstructorRequest request)
         {
-            return _instructorService.Update(request);
+            return HandleDataResult(_instructorService.Update(request));
         }
 
         [HttpGet]
-        public List<GetAllInstructorResponse> GetAll()
+        public IActionResult GetAll()
         {
-            return _instructorService.GetAll();
+            return HandleDataResult(_instructorService.GetAll());
         }
 
         [HttpGet("{id}")]
-        public GetByIdInstructorResponse GetById(int id)
+        public IActionResult GetById(int id)
         {
-            return _instructorService.GetById(id);
+            return HandleDataResult(_instructorService.GetById(id));
         }
     }
 }

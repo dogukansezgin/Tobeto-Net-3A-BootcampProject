@@ -2,6 +2,7 @@
 using Business.Abstracts;
 using Business.Requests.Instructors;
 using Business.Responses.Instructors;
+using Core.Utilities.Results;
 using DataAccess.Abstracts;
 using Entities.Concretes;
 
@@ -18,39 +19,39 @@ public class InstructorManager : IInstructorService
         _mapper = mapper;
     }
 
-    public CreateInstructorResponse Add(CreateInstructorRequest request)
+    public IDataResult<CreateInstructorResponse> Add(CreateInstructorRequest request)
     {
         Instructor instructor = _mapper.Map<Instructor>(request);
         _instructorRepository.Add(instructor);
 
         CreateInstructorResponse response = _mapper.Map<CreateInstructorResponse>(instructor);
-        return response;
+        return new SuccessDataResult<CreateInstructorResponse>(response, "Added Succesfully");
     }
 
-    public DeleteInstructorResponse Delete(DeleteInstructorRequest request)
+    public IDataResult<DeleteInstructorResponse> Delete(DeleteInstructorRequest request)
     {
         Instructor instructor = _mapper.Map<Instructor>(request);
         _instructorRepository.Delete(instructor);
 
         DeleteInstructorResponse response = _mapper.Map<DeleteInstructorResponse>(instructor);
-        return response;
+        return new SuccessDataResult<DeleteInstructorResponse>(response, "Deleted Succesfully");
     }
 
-    public List<GetAllInstructorResponse> GetAll()
+    public IDataResult<List<GetAllInstructorResponse>> GetAll()
     {
         List<Instructor> instructors = _instructorRepository.GetAll();
         List<GetAllInstructorResponse> responses = _mapper.Map<List<GetAllInstructorResponse>>(instructors);
-        return responses;
+        return new SuccessDataResult<List<GetAllInstructorResponse>>(responses, "Listed Succesfully");
     }
 
-    public GetByIdInstructorResponse GetById(int id)
+    public IDataResult<GetByIdInstructorResponse> GetById(int id)
     {
         Instructor instructor = _instructorRepository.Get(x => x.Id == id);
         GetByIdInstructorResponse response = _mapper.Map<GetByIdInstructorResponse>(instructor);
-        return response;
+        return new SuccessDataResult<GetByIdInstructorResponse>(response, "Listed Succesfully");
     }
 
-    public UpdateInstructorResponse Update(UpdateInstructorRequest request)
+    public IDataResult<UpdateInstructorResponse> Update(UpdateInstructorRequest request)
     {
         Instructor instructor = _instructorRepository.Get(u => u.Id == request.Id);
         instructor.UserName = request.UserName ?? instructor.UserName;
@@ -65,6 +66,6 @@ public class InstructorManager : IInstructorService
         _instructorRepository.Update(instructor);
 
         UpdateInstructorResponse response = _mapper.Map<UpdateInstructorResponse>(instructor);
-        return response;
+        return new SuccessDataResult<UpdateInstructorResponse>(response, "Updated Succesfully");
     }
 }

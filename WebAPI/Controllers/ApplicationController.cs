@@ -8,7 +8,7 @@ namespace WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ApplicationController : ControllerBase
+    public class ApplicationController : BaseController
     {
         private readonly IApplicationService _applicationService;
 
@@ -18,33 +18,33 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost]
-        public CreateApplicationResponse Add(CreateApplicationRequest request)
+        public IActionResult Add(CreateApplicationRequest request)
         {
-            return _applicationService.Add(request);
+            return HandleDataResult(_applicationService.Add(request));
         }
 
         [HttpDelete]
-        public DeleteApplicationResponse Delete(DeleteApplicationRequest request)
+        public IActionResult Delete(DeleteApplicationRequest request)
         {
-            return _applicationService.Delete(request);
+            return HandleDataResult(_applicationService.Delete(request));
         }
 
         [HttpPut]
-        public UpdateApplicationResponse Update(UpdateApplicationRequest request)
+        public IActionResult Update(UpdateApplicationRequest request)
         {
-            return _applicationService.Update(request);
+            return HandleDataResult(_applicationService.Update(request));
         }
 
         [HttpGet]
-        public List<GetAllApplicationResponse> GetAll()
+        public IActionResult GetAll()
         {
-            return _applicationService.GetAll();
+            return HandleDataResult(_applicationService.GetAll());
         }
 
         [HttpGet("{id}")]
-        public GetByIdApplicationResponse GetById(int id)
+        public IActionResult GetById(int id)
         {
-            return _applicationService.GetById(id);
+            return HandleDataResult(_applicationService.GetById(id));
         }
     }
 }

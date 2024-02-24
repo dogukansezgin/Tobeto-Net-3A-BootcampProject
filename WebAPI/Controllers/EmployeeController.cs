@@ -8,7 +8,7 @@ namespace WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class EmployeeController : ControllerBase
+    public class EmployeeController : BaseController
     {
         private readonly IEmployeeService _employeeService;
 
@@ -18,33 +18,33 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost]
-        public CreateEmployeeResponse Add(CreateEmployeeRequest request)
+        public IActionResult Add(CreateEmployeeRequest request)
         {
-            return _employeeService.Add(request);
+            return HandleDataResult(_employeeService.Add(request));
         }
 
         [HttpDelete]
-        public DeleteEmployeeResponse Delete(DeleteEmployeeRequest request)
+        public IActionResult Delete(DeleteEmployeeRequest request)
         {
-            return _employeeService.Delete(request);
+            return HandleDataResult(_employeeService.Delete(request));
         }
 
         [HttpPut]
-        public UpdateEmployeeResponse Update(UpdateEmployeeRequest request)
+        public IActionResult Update(UpdateEmployeeRequest request)
         {
-            return _employeeService.Update(request);
+            return HandleDataResult(_employeeService.Update(request));
         }
 
         [HttpGet]
-        public List<GetAllEmployeeResponse> GetAll()
+        public IActionResult GetAll()
         {
-            return _employeeService.GetAll();
+            return HandleDataResult(_employeeService.GetAll());
         }
 
         [HttpGet("{id}")]
-        public GetByIdEmployeeResponse GetById(int id)
+        public IActionResult GetById(int id)
         {
-            return _employeeService.GetById(id);
+            return HandleDataResult(_employeeService.GetById(id));
         }
     }
 }

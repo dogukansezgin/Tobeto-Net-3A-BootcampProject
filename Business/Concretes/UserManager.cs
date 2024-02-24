@@ -1,9 +1,11 @@
-﻿using Business.Abstracts;
-using Entities.Concretes;
-using DataAccess.Abstracts;
+﻿using AutoMapper;
+using Azure;
+using Business.Abstracts;
 using Business.Requests.Users;
 using Business.Responses.Users;
-using AutoMapper;
+using Core.Utilities.Results;
+using DataAccess.Abstracts;
+using Entities.Concretes;
 
 namespace Business.Concretes;
 
@@ -18,39 +20,39 @@ public class UserManager : IUserService
         _mapper = mapper;
     }
 
-    public CreateUserResponse Add(CreateUserRequest request)
+    public IDataResult<CreateUserResponse> Add(CreateUserRequest request)
     {
         User user = _mapper.Map<User>(request);
         _userRepository.Add(user);
 
         CreateUserResponse response = _mapper.Map<CreateUserResponse>(user);
-        return response;
+        return new SuccessDataResult<CreateUserResponse>(response, "Added Succesfully");
     }
 
-    public DeleteUserResponse Delete(DeleteUserRequest request)
+    public IDataResult<DeleteUserResponse> Delete(DeleteUserRequest request)
     {
         User user = _mapper.Map<User>(request);
         _userRepository.Delete(user);
 
         DeleteUserResponse response = _mapper.Map<DeleteUserResponse>(user);
-        return response;
+        return new SuccessDataResult<DeleteUserResponse>(response, "Deleted Succesfully");
     }
 
-    public List<GetAllUserResponse> GetAll()
+    public IDataResult<List<GetAllUserResponse>> GetAll()
     {
         List<User> users = _userRepository.GetAll();
         List<GetAllUserResponse> responses = _mapper.Map<List<GetAllUserResponse>>(users);
-        return responses;
+        return new SuccessDataResult<List<GetAllUserResponse>>(responses, "Listed Succesfully");
     }
 
-    public GetByIdUserResponse GetById(int id)
+    public IDataResult<GetByIdUserResponse> GetById(int id)
     {
         User user = _userRepository.Get(x => x.Id == id);
         GetByIdUserResponse response = _mapper.Map<GetByIdUserResponse>(user);
-        return response;
+        return new SuccessDataResult<GetByIdUserResponse>(response, "Listed Succesfully");
     }
 
-    public UpdateUserResponse Update(UpdateUserRequest request)
+    public IDataResult<UpdateUserResponse> Update(UpdateUserRequest request)
     {
         User user = _userRepository.Get(u => u.Id == request.Id);
         user.UserName = request.UserName ?? user.UserName;
@@ -64,6 +66,6 @@ public class UserManager : IUserService
         _userRepository.Update(user);
 
         UpdateUserResponse response = _mapper.Map<UpdateUserResponse>(user);
-        return response;
+        return new SuccessDataResult<UpdateUserResponse>(response, "Updated Succesfully");
     }
 }
