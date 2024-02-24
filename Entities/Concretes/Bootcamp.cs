@@ -12,10 +12,11 @@ public class Bootcamp : BaseEntity<int>
 
     public virtual Instructor? Instructor { get; set; }
     public virtual BootcampState? BootcampState { get; set; }
+    public virtual ICollection<BootcampImage> BootcampImages { get; set; }
 
     public Bootcamp()
     {
-        
+        BootcampImages = new HashSet<BootcampImage>();
     }
 
     public Bootcamp(int id, string name, int ınstructorId, int bootcampStateId, DateTime startDate, DateTime endDate)

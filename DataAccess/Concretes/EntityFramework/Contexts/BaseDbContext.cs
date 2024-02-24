@@ -10,12 +10,14 @@ public class BaseDbContext : DbContext
     protected IConfiguration Configuration { get; set; }
     public DbSet<User> Users { get; set; }
     public DbSet<Instructor> Instructors { get; set; }
+    public DbSet<InstructorImage> InstructorImages { get; set; }
     public DbSet<Employee> Employees { get; set; }
     public DbSet<Applicant> Applicants { get; set; }
     public DbSet<Application> Applications { get; set; }
     public DbSet<ApplicationState> ApplicationStates { get; set; }
     public DbSet<Bootcamp> Bootcamp { get; set; }
     public DbSet<BootcampState> BootcampStates { get; set; }
+    public DbSet<BootcampImage> BootcampImages { get; set; }
 
     public BaseDbContext(DbContextOptions dbContextOptions, IConfiguration configuration) : base(dbContextOptions)
     {
