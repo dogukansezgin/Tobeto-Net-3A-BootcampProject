@@ -14,13 +14,19 @@ public static class DataAccessServiceRegistration
         services.AddDbContext<BaseDbContext>(options => options.UseSqlServer(configuration.GetConnectionString("TobetoBootcampProjectConnectionString")));
 
         services.AddScoped<IUserRepository, UserRepository>();
-        services.AddScoped<IInstructorRepository, InstructorRepository>();
         services.AddScoped<IEmployeeRepository, EmployeeRepository>();
         services.AddScoped<IApplicantRepository, ApplicantRepository>();
+        services.AddScoped<IInstructorRepository, InstructorRepository>();
+        services.AddScoped<IInstructorImageRepository, InstructorImageRepository>();
+
         services.AddScoped<IApplicationRepository, ApplicationRepository>();
         services.AddScoped<IApplicationStateRepository, ApplicationStateRepository>();
+
         services.AddScoped<IBootcampRepository, BootcampRepository>();
         services.AddScoped<IBootcampStateRepository, BootcampStateRepository>();
+        services.AddScoped<IBootcampImageRepository, BootcampImageRepository>();
+
+        services.AddScoped<IBlacklistRepository, BlacklistRepository>();
 
         return services;
     }

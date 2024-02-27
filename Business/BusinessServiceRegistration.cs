@@ -13,12 +13,15 @@ public static class BusinessServiceRegistration
 
         services.AddScoped<IUserService, UserManager>();
         services.AddScoped<IInstructorService, InstructorManager>();
+        services.AddScoped<IInstructorImageService, InstructorImageManager>();
         services.AddScoped<IEmployeeService, EmployeeManager>();
         services.AddScoped<IApplicantService, ApplicantManager>();
         services.AddScoped<IApplicationService, ApplicationManager>();
         services.AddScoped<IApplicationStateService, ApplicationStateManager>();
         services.AddScoped<IBootcampService, BootcampManager>();
         services.AddScoped<IBootcampStateService, BootcampStateManager>();
+        services.AddScoped<IBootcampImageService, BootcampImageManager>();
+        services.AddScoped<IBlacklistService, BlacklistManager>();
 
         return services;
     }
