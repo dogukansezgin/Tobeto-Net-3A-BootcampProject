@@ -7,7 +7,7 @@ namespace Business.Abstracts;
 public interface IInstructorService
 {
     IDataResult<CreateInstructorResponse> Add(CreateInstructorRequest request);
-    IDataResult<DeleteInstructorResponse> Delete(DeleteInstructorRequest request);
+    IResult Delete(int id);
     IDataResult<UpdateInstructorResponse> Update(UpdateInstructorRequest request);
     IDataResult<GetByIdInstructorResponse> GetById(int id);
     IDataResult<List<GetAllInstructorResponse>> GetAll();

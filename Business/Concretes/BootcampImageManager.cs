@@ -29,13 +29,11 @@ public class BootcampImageManager : IBootcampImageService
         return new SuccessDataResult<CreateBootcampImageResponse>(response, "Added Succesfully");
     }
 
-    public IDataResult<DeleteBootcampImageResponse> Delete(DeleteBootcampImageRequest request)
+    public IResult Delete(Guid id)
     {
-        BootcampImage bootcampImage = _mapper.Map<BootcampImage>(request);
+        BootcampImage bootcampImage = _bootcampImageRepository.Get(x => x.Id == id);
         _bootcampImageRepository.Delete(bootcampImage);
-
-        DeleteBootcampImageResponse response = _mapper.Map<DeleteBootcampImageResponse>(bootcampImage);
-        return new SuccessDataResult<DeleteBootcampImageResponse>(response, "Deleted Succesfully");
+        return new SuccessResult("Deleted Succesfully");
     }
 
     public IDataResult<List<GetAllBootcampImageResponse>> GetAll()

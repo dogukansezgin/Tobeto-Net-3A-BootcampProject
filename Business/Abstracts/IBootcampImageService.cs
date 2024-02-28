@@ -7,7 +7,7 @@ namespace Business.Abstracts;
 public interface IBootcampImageService
 {
     IDataResult<CreateBootcampImageResponse> Add(CreateBootcampImageRequest request);
-    IDataResult<DeleteBootcampImageResponse> Delete(DeleteBootcampImageRequest request);
+    IResult Delete(Guid id);
     IDataResult<UpdateBootcampImageResponse> Update(UpdateBootcampImageRequest request);
     IDataResult<GetByIdBootcampImageResponse> GetById(Guid id);
     IDataResult<List<GetAllBootcampImageResponse>> GetAll();

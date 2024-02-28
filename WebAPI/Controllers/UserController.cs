@@ -24,10 +24,11 @@ namespace WebAPI.Controllers
             return HandleDataResult(_userService.Add(request));
         }
 
-        [HttpDelete]
-        public IActionResult Delete(DeleteUserRequest request)
+
+        [HttpDelete("{id}")]
+        public IActionResult Delete([FromRoute] int id)
         {
-            return HandleDataResult(_userService.Delete(request));
+            return HandleResult(_userService.Delete(id));
         }
 
         [HttpPut]
@@ -43,7 +44,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet("{id}")]
-        public IActionResult GetById(int id)
+        public IActionResult GetById([FromRoute] int id)
         {
             return HandleDataResult(_userService.GetById(id));
         }

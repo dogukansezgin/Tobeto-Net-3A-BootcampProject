@@ -29,13 +29,11 @@ public class ApplicationManager : IApplicationService
         return new SuccessDataResult<CreateApplicationResponse>(response, "Added Succesfully");
     }
 
-    public IDataResult<DeleteApplicationResponse> Delete(DeleteApplicationRequest request)
+    public IResult Delete(int id)
     {
-        Application application = _mapper.Map<Application>(request);
+        Application application = _applicationRepository.Get(x => x.Id == id);
         _applicationRepository.Delete(application);
-
-        DeleteApplicationResponse response = _mapper.Map<DeleteApplicationResponse>(application);
-        return new SuccessDataResult<DeleteApplicationResponse>(response, "Deleted Succesfully");
+        return new SuccessResult("Deleted Succesfully");
     }
 
     public IDataResult<List<GetAllApplicationResponse>> GetAll()

@@ -27,13 +27,11 @@ public class BootcampStateManager : IBootcampStateService
         return new SuccessDataResult<CreateBootcampStateResponse>(response, "Added Succesfully");
     }
 
-    public IDataResult<DeleteBootcampStateResponse> Delete(DeleteBootcampStateRequest request)
+    public IResult Delete(int id)
     {
-        BootcampState bootcampState = _mapper.Map<BootcampState>(request);
+        BootcampState bootcampState = _bootcampStateRepository.Get(x => x.Id == id);
         _bootcampStateRepository.Delete(bootcampState);
-
-        DeleteBootcampStateResponse response = _mapper.Map<DeleteBootcampStateResponse>(bootcampState);
-        return new SuccessDataResult<DeleteBootcampStateResponse>(response, "Deleted Succesfully");
+        return new SuccessResult("Deleted Succesfully");
     }
 
     public IDataResult<List<GetAllBootcampStateResponse>> GetAll()

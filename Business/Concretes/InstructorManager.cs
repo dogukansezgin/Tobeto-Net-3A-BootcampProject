@@ -28,13 +28,11 @@ public class InstructorManager : IInstructorService
         return new SuccessDataResult<CreateInstructorResponse>(response, "Added Succesfully");
     }
 
-    public IDataResult<DeleteInstructorResponse> Delete(DeleteInstructorRequest request)
+    public IResult Delete(int id)
     {
-        Instructor instructor = _mapper.Map<Instructor>(request);
+        Instructor instructor = _instructorRepository.Get(x => x.Id == id);
         _instructorRepository.Delete(instructor);
-
-        DeleteInstructorResponse response = _mapper.Map<DeleteInstructorResponse>(instructor);
-        return new SuccessDataResult<DeleteInstructorResponse>(response, "Deleted Succesfully");
+        return new SuccessResult("Deleted Succesfully");
     }
 
     public IDataResult<List<GetAllInstructorResponse>> GetAll()

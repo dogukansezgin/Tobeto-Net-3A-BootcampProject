@@ -22,10 +22,10 @@ namespace WebAPI.Controllers
             return HandleDataResult(_bootcampImageService.Add(request));
         }
 
-        [HttpDelete]
-        public IActionResult Delete(DeleteBootcampImageRequest request)
+        [HttpDelete("{id}")]
+        public IActionResult Delete([FromRoute] Guid id)
         {
-            return HandleDataResult(_bootcampImageService.Delete(request));
+            return HandleResult(_bootcampImageService.Delete(id));
         }
 
         [HttpPut]
@@ -41,7 +41,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet("{id}")]
-        public IActionResult GetById(Guid id)
+        public IActionResult GetById([FromRoute] Guid id)
         {
             return HandleDataResult(_bootcampImageService.GetById(id));
         }

@@ -7,7 +7,7 @@ namespace Business.Abstracts;
 public interface IBootcampStateService
 {
     IDataResult<CreateBootcampStateResponse> Add(CreateBootcampStateRequest request);
-    IDataResult<DeleteBootcampStateResponse> Delete(DeleteBootcampStateRequest request);
+    IResult Delete(int id);
     IDataResult<UpdateBootcampStateResponse> Update(UpdateBootcampStateRequest request);
     IDataResult<GetByIdBootcampStateResponse> GetById(int id);
     IDataResult<List<GetAllBootcampStateResponse>> GetAll();

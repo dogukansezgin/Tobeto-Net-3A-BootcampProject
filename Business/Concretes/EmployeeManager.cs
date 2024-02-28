@@ -28,13 +28,11 @@ public class EmployeeManager : IEmployeeService
         return new SuccessDataResult<CreateEmployeeResponse>(response, "Added Succesfully");
     }
 
-    public IDataResult<DeleteEmployeeResponse> Delete(DeleteEmployeeRequest request)
+    public IResult Delete(int id)
     {
-        Employee employee = _mapper.Map<Employee>(request);
+        Employee employee = _employeeRepository.Get(x => x.Id == id);
         _employeeRepository.Delete(employee);
-
-        DeleteEmployeeResponse response = _mapper.Map<DeleteEmployeeResponse>(employee);
-        return new SuccessDataResult<DeleteEmployeeResponse>(response, "Deleted Succesfully");
+        return new SuccessResult("Deleted Succesfully");
     }
 
     public IDataResult<List<GetAllEmployeeResponse>> GetAll()

@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Azure;
 using Business.Abstracts;
 using Business.Requests.Users;
 using Business.Responses.Users;
@@ -29,13 +28,11 @@ public class UserManager : IUserService
         return new SuccessDataResult<CreateUserResponse>(response, "Added Succesfully");
     }
 
-    public IDataResult<DeleteUserResponse> Delete(DeleteUserRequest request)
+    public IResult Delete(int id)
     {
-        User user = _mapper.Map<User>(request);
+        User user = _userRepository.Get(x => x.Id == id);
         _userRepository.Delete(user);
-
-        DeleteUserResponse response = _mapper.Map<DeleteUserResponse>(user);
-        return new SuccessDataResult<DeleteUserResponse>(response, "Deleted Succesfully");
+        return new SuccessResult("Deleted Succesfully");
     }
 
     public IDataResult<List<GetAllUserResponse>> GetAll()

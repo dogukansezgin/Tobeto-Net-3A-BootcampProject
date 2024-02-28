@@ -28,13 +28,11 @@ public class ApplicantManager : IApplicantService
         return new SuccessDataResult<CreateApplicantResponse>(response, "Added Succesfully");
     }
 
-    public IDataResult<DeleteApplicantResponse> Delete(DeleteApplicantRequest request)
+    public IResult Delete(int id)
     {
-        Applicant applicant = _mapper.Map<Applicant>(request);
+        Applicant applicant = _applicantRepository.Get(x => x.Id == id);
         _applicantRepository.Delete(applicant);
-
-        DeleteApplicantResponse response = _mapper.Map<DeleteApplicantResponse>(applicant);
-        return new SuccessDataResult<DeleteApplicantResponse>(response, "Deleted Succesfully");
+        return new SuccessResult("Deleted Succesfully");
     }
 
     public IDataResult<List<GetAllApplicantResponse>> GetAll()

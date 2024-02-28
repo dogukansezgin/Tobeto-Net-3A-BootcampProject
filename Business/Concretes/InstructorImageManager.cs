@@ -14,9 +14,9 @@ public class InstructorImageManager : IInstructorImageService
     private readonly IInstructorImageRepository _instructorImageRepository;
     private readonly IMapper _mapper;
 
-    public InstructorImageManager(IInstructorImageRepository ınstructorımageRepository, IMapper mapper)
+    public InstructorImageManager(IInstructorImageRepository instructorImageRepository, IMapper mapper)
     {
-        _instructorImageRepository = ınstructorımageRepository;
+        _instructorImageRepository = instructorImageRepository;
         _mapper = mapper;
     }
 
@@ -29,13 +29,11 @@ public class InstructorImageManager : IInstructorImageService
         return new SuccessDataResult<CreateInstructorImageResponse>(response, "Added Succesfully");
     }
 
-    public IDataResult<DeleteInstructorImageResponse> Delete(DeleteInstructorImageRequest request)
+    public IResult Delete(Guid id)
     {
-        InstructorImage instructorImage = _mapper.Map<InstructorImage>(request);
+        InstructorImage instructorImage = _instructorImageRepository.Get(x => x.Id == id);
         _instructorImageRepository.Delete(instructorImage);
-
-        DeleteInstructorImageResponse response = _mapper.Map<DeleteInstructorImageResponse>(instructorImage);
-        return new SuccessDataResult<DeleteInstructorImageResponse>(response, "Deleted Succesfully");
+        return new SuccessResult("Deleted Succesfully");
     }
 
     public IDataResult<List<GetAllInstructorImageResponse>> GetAll()

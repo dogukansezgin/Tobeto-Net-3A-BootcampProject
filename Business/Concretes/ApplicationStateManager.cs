@@ -28,13 +28,11 @@ public class ApplicationStateManager : IApplicationStateService
         return new SuccessDataResult<CreateApplicationStateResponse>(response, "Added Succesfully");
     }
 
-    public IDataResult<DeleteApplicationStateResponse> Delete(DeleteApplicationStateRequest request)
+    public IResult Delete(int id)
     {
-        ApplicationState applicationState = _mapper.Map<ApplicationState>(request);
+        ApplicationState applicationState = _applicationStateRepository.Get(x => x.Id == id);
         _applicationStateRepository.Delete(applicationState);
-
-        DeleteApplicationStateResponse response = _mapper.Map<DeleteApplicationStateResponse>(applicationState);
-        return new SuccessDataResult<DeleteApplicationStateResponse>(response, "Deleted Succesfully");
+        return new SuccessResult("Deleted Succesfully");
     }
 
     public IDataResult<List<GetAllApplicationStateResponse>> GetAll()

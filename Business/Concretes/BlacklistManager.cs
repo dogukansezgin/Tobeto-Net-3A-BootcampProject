@@ -29,13 +29,11 @@ public class BlacklistManager : IBlacklistService
         return new SuccessDataResult<CreateBlacklistResponse>(response, "Added Succesfully");
     }
 
-    public IDataResult<DeleteBlacklistResponse> Delete(DeleteBlacklistRequest request)
+    public IResult Delete(int id)
     {
-        Blacklist blacklist = _mapper.Map<Blacklist>(request);
+        Blacklist blacklist = _blacklistRepository.Get(x => x.Id == id);
         _blacklistRepository.Delete(blacklist);
-
-        DeleteBlacklistResponse response = _mapper.Map<DeleteBlacklistResponse>(blacklist);
-        return new SuccessDataResult<DeleteBlacklistResponse>(response, "Deleted Succesfully");
+        return new SuccessResult("Deleted Succesfully");
     }
 
     public IDataResult<List<GetAllBlacklistResponse>> GetAll()

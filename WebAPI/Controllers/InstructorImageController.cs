@@ -22,10 +22,11 @@ namespace WebAPI.Controllers
             return HandleDataResult(_instructorImageService.Add(request));
         }
 
-        [HttpDelete]
-        public IActionResult Delete(DeleteInstructorImageRequest request)
+
+        [HttpDelete("{id}")]
+        public IActionResult Delete([FromRoute] Guid id)
         {
-            return HandleDataResult(_instructorImageService.Delete(request));
+            return HandleResult(_instructorImageService.Delete(id));
         }
 
         [HttpPut]
@@ -41,7 +42,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet("{id}")]
-        public IActionResult GetById(Guid id)
+        public IActionResult GetById([FromRoute] Guid id)
         {
             return HandleDataResult(_instructorImageService.GetById(id));
         }

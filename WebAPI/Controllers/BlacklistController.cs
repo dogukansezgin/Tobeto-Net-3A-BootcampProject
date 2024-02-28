@@ -22,10 +22,10 @@ namespace WebAPI.Controllers
             return HandleDataResult(_blacklistService.Add(request));
         }
 
-        [HttpDelete]
-        public IActionResult Delete(DeleteBlacklistRequest request)
+        [HttpDelete("{id}")]
+        public IActionResult Delete([FromRoute] int id)
         {
-            return HandleDataResult(_blacklistService.Delete(request));
+            return HandleResult(_blacklistService.Delete(id));
         }
 
         [HttpPut]
@@ -41,7 +41,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet("{id}")]
-        public IActionResult GetById(int id)
+        public IActionResult GetById([FromRoute] int id)
         {
             return HandleDataResult(_blacklistService.GetById(id));
         }

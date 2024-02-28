@@ -22,10 +22,10 @@ namespace WebAPI.Controllers
             return HandleDataResult(_bootcampStateService.Add(request));
         }
 
-        [HttpDelete]
-        public IActionResult Delete(DeleteBootcampStateRequest request)
+        [HttpDelete("{id}")]
+        public IActionResult Delete([FromRoute] int id)
         {
-            return HandleDataResult(_bootcampStateService.Delete(request));
+            return HandleResult(_bootcampStateService.Delete(id));
         }
 
         [HttpPut]
@@ -41,7 +41,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet("{id}")]
-        public IActionResult GetById(int id)
+        public IActionResult GetById([FromRoute] int id)
         {
             return HandleDataResult(_bootcampStateService.GetById(id));
         }

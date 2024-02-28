@@ -7,7 +7,7 @@ namespace Business.Abstracts;
 public interface IBlacklistService
 {
     IDataResult<CreateBlacklistResponse> Add(CreateBlacklistRequest request);
-    IDataResult<DeleteBlacklistResponse> Delete(DeleteBlacklistRequest request);
+    IResult Delete(int id);
     IDataResult<UpdateBlacklistResponse> Update(UpdateBlacklistRequest request);
     IDataResult<GetByIdBlacklistResponse> GetById(int id);
     IDataResult<List<GetAllBlacklistResponse>> GetAll();

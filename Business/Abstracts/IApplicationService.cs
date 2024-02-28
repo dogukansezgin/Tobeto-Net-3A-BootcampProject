@@ -7,7 +7,7 @@ namespace Business.Abstracts;
 public interface IApplicationService
 {
     IDataResult<CreateApplicationResponse> Add(CreateApplicationRequest request);
-    IDataResult<DeleteApplicationResponse> Delete(DeleteApplicationRequest request);
+    IResult Delete(int id);
     IDataResult<UpdateApplicationResponse> Update(UpdateApplicationRequest request);
     IDataResult<GetByIdApplicationResponse> GetById(int id);
     IDataResult<List<GetAllApplicationResponse>> GetAll();
