@@ -1,4 +1,4 @@
-﻿using Business.Abstracts;
+﻿using Business.Abstracts.Blacklists;
 using Business.Requests.Blacklists;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;

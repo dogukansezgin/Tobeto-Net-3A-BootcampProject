@@ -1,4 +1,4 @@
-﻿using Business.Abstracts;
+﻿using Business.Abstracts.InstructorImages;
 using Business.Requests.InstructorImages;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;

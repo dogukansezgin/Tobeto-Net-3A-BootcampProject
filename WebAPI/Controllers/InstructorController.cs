@@ -1,4 +1,4 @@
-﻿using Business.Abstracts;
+﻿using Business.Abstracts.Instructors;
 using Business.Requests.Instructors;
 using Business.Responses.Instructors;
 using Microsoft.AspNetCore.Http;

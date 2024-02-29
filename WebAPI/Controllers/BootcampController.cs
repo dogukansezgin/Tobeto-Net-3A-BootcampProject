@@ -1,4 +1,4 @@
-﻿using Business.Abstracts;
+﻿using Business.Abstracts.Bootcamps;
 using Business.Requests.Bootcamps;
 using Business.Responses.Bootcamps;
 using Microsoft.AspNetCore.Http;
