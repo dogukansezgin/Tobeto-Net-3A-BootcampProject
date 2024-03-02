@@ -1,7 +1,6 @@
 ﻿using Business.Abstracts.Applicants;
 using Business.Requests.Applicants;
 using Business.Responses.Applicants;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Controllers
