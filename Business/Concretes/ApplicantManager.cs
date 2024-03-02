@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Business.Abstracts;
+using Business.Constants.Messages;
 using Business.Requests.Applicants;
 using Business.Responses.Applicants;
 using Business.Rules;
@@ -30,7 +31,7 @@ public class ApplicantManager : IApplicantService
         _applicantRepository.Add(applicant);
 
         CreateApplicantResponse response = _mapper.Map<CreateApplicantResponse>(applicant);
-        return new SuccessDataResult<CreateApplicantResponse>(response, "Added Succesfully");
+        return new SuccessDataResult<CreateApplicantResponse>(response, ApplicantMessages.ApplicantAdded);
     }
 
     public void CheckExistById(int id)
@@ -44,14 +45,14 @@ public class ApplicantManager : IApplicantService
 
         Applicant applicant = _applicantRepository.Get(x => x.Id == id);
         _applicantRepository.Delete(applicant);
-        return new SuccessResult("Deleted Succesfully");
+        return new SuccessResult(ApplicantMessages.ApplicantDeleted);
     }
 
     public IDataResult<List<GetAllApplicantResponse>> GetAll()
     {
         List<Applicant> applicants = _applicantRepository.GetAll();
         List<GetAllApplicantResponse> responses = _mapper.Map<List<GetAllApplicantResponse>>(applicants);
-        return new SuccessDataResult<List<GetAllApplicantResponse>>(responses, "Listed Succesfully");
+        return new SuccessDataResult<List<GetAllApplicantResponse>>(responses, ApplicantMessages.ApplicantListed);
     }
 
     public IDataResult<GetByIdApplicantResponse> GetById(int id)
@@ -60,7 +61,7 @@ public class ApplicantManager : IApplicantService
 
         Applicant applicant = _applicantRepository.Get(x => x.Id == id);
         GetByIdApplicantResponse response = _mapper.Map<GetByIdApplicantResponse>(applicant);
-        return new SuccessDataResult<GetByIdApplicantResponse>(response, "Listed Succesfully");
+        return new SuccessDataResult<GetByIdApplicantResponse>(response, ApplicantMessages.ApplicantListed);
     }
 
     public IDataResult<UpdateApplicantResponse> Update(UpdateApplicantRequest request)
@@ -72,6 +73,6 @@ public class ApplicantManager : IApplicantService
         _applicantRepository.Update(applicant);
 
         UpdateApplicantResponse response = _mapper.Map<UpdateApplicantResponse>(applicant);
-        return new SuccessDataResult<UpdateApplicantResponse>(response, "Updated Succesfully");
+        return new SuccessDataResult<UpdateApplicantResponse>(response, ApplicantMessages.ApplicantUpdated);
     }
 }
