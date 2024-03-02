@@ -1,7 +1,5 @@
-﻿using Business.Abstracts.ApplicatonStates;
+﻿using Business.Abstracts;
 using Business.Requests.ApplicationStates;
-using Business.Responses.ApplicationStates;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Controllers

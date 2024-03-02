@@ -1,8 +1,7 @@
-﻿using Business.Abstracts.BootcampStates;
+﻿using Business.Abstracts;
 using Business.Requests.BootcampStates;
-using Business.Responses.BootcampStates;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
 
 namespace WebAPI.Controllers
 {

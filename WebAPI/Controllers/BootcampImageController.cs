@@ -1,6 +1,5 @@
-﻿using Business.Abstracts.BootcampImages;
+﻿using Business.Abstracts;
 using Business.Requests.BootcampImages;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Controllers

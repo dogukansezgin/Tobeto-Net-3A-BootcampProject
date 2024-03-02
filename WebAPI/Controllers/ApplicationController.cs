@@ -1,4 +1,4 @@
-﻿using Business.Abstracts.Applications;
+﻿using Business.Abstracts;
 using Business.Requests.Applications;
 using Business.Responses.Applications;
 using Microsoft.AspNetCore.Http;

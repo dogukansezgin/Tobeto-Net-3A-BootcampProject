@@ -1,7 +1,5 @@
-﻿using Business.Abstracts.Bootcamps;
+﻿using Business.Abstracts;
 using Business.Requests.Bootcamps;
-using Business.Responses.Bootcamps;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Controllers

@@ -1,6 +1,5 @@
-﻿using Business.Abstracts.InstructorImages;
+﻿using Business.Abstracts;
 using Business.Requests.InstructorImages;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Controllers
