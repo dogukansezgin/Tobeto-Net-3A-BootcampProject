@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Business.Abstracts;
+using Business.Constants.Messages;
 using Business.Requests.Bootcamps;
 using Business.Responses.Bootcamps;
 using Business.Rules;
@@ -30,7 +31,7 @@ public class BootcampManager : IBootcampService
         _bootcampRepository.Add(bootcamp);
 
         CreateBootcampResponse response = _mapper.Map<CreateBootcampResponse>(bootcamp);
-        return new SuccessDataResult<CreateBootcampResponse>(response, "Added Succesfully");
+        return new SuccessDataResult<CreateBootcampResponse>(response, BootcampMessages.BootcampAdded);
     }
 
     public void CheckExistById(int id)
@@ -43,14 +44,14 @@ public class BootcampManager : IBootcampService
         _bootcampBusinessRules.CheckIfBootcampIdExist(id);
         Bootcamp bootcamp = _bootcampRepository.Get(x => x.Id == id);
         _bootcampRepository.Delete(bootcamp);
-        return new SuccessResult("Deleted Succesfully");
+        return new SuccessResult(BootcampMessages.BootcampDeleted);
     }
 
     public IDataResult<List<GetAllBootcampResponse>> GetAll()
     {
         List<Bootcamp> bootcamps = _bootcampRepository.GetAll(include: x => x.Include(x => x.Instructor).Include(x => x.BootcampState));
         List<GetAllBootcampResponse> responses = _mapper.Map<List<GetAllBootcampResponse>>(bootcamps);
-        return new SuccessDataResult<List<GetAllBootcampResponse>>(responses, "Listed Succesfully");
+        return new SuccessDataResult<List<GetAllBootcampResponse>>(responses, BootcampMessages.BootcampListed);
     }
 
     public IDataResult<GetByIdBootcampResponse> GetById(int id)
@@ -58,7 +59,7 @@ public class BootcampManager : IBootcampService
         _bootcampBusinessRules.CheckIfBootcampIdExist(id);
         Bootcamp bootcamp = _bootcampRepository.Get(x => x.Id == id, include: x => x.Include(x => x.Instructor).Include(x => x.BootcampState));
         GetByIdBootcampResponse response = _mapper.Map<GetByIdBootcampResponse>(bootcamp);
-        return new SuccessDataResult<GetByIdBootcampResponse>(response, "Listed Succesfully");
+        return new SuccessDataResult<GetByIdBootcampResponse>(response, BootcampMessages.BootcampListed);
     }
 
     public IDataResult<UpdateBootcampResponse> Update(UpdateBootcampRequest request)
@@ -70,6 +71,6 @@ public class BootcampManager : IBootcampService
         _bootcampRepository.Update(bootcamp);
 
         UpdateBootcampResponse response = _mapper.Map<UpdateBootcampResponse>(bootcamp);
-        return new SuccessDataResult<UpdateBootcampResponse>(response, "Updated Succesfully");
+        return new SuccessDataResult<UpdateBootcampResponse>(response, BootcampMessages.BootcampUpdated);
     }
 }

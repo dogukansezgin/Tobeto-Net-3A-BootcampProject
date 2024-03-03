@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Business.Abstracts;
+using Business.Constants.Messages;
 using Business.Requests.ApplicationStates;
 using Business.Responses.ApplicationStates;
 using Business.Rules;
@@ -29,7 +30,7 @@ public class ApplicationStateManager : IApplicationStateService
         _applicationStateRepository.Add(applicationState);
 
         CreateApplicationStateResponse response = _mapper.Map<CreateApplicationStateResponse>(applicationState);
-        return new SuccessDataResult<CreateApplicationStateResponse>(response, "Added Succesfully");
+        return new SuccessDataResult<CreateApplicationStateResponse>(response, ApplicationStateMessages.ApplicationStateAdded);
     }
 
     public void CheckExistById(int id)
@@ -42,14 +43,14 @@ public class ApplicationStateManager : IApplicationStateService
         _applicationStateBusinessRules.CheckIfApplicationStateIdExist(id);
         ApplicationState applicationState = _applicationStateRepository.Get(x => x.Id == id);
         _applicationStateRepository.Delete(applicationState);
-        return new SuccessResult("Deleted Succesfully");
+        return new SuccessResult(ApplicationStateMessages.ApplicationStateDeleted);
     }
 
     public IDataResult<List<GetAllApplicationStateResponse>> GetAll()
     {
         List<ApplicationState> applicationState = _applicationStateRepository.GetAll();
         List<GetAllApplicationStateResponse> responses = _mapper.Map<List<GetAllApplicationStateResponse>>(applicationState);
-        return new SuccessDataResult<List<GetAllApplicationStateResponse>>(responses, "Listed Succesfully");
+        return new SuccessDataResult<List<GetAllApplicationStateResponse>>(responses, ApplicationStateMessages.ApplicationStateListed);
     }
 
     public IDataResult<GetByIdApplicationStateResponse> GetById(int id)
@@ -57,7 +58,7 @@ public class ApplicationStateManager : IApplicationStateService
         _applicationStateBusinessRules.CheckIfApplicationStateIdExist(id);
         ApplicationState applicationState = _applicationStateRepository.Get(x => x.Id == id);
         GetByIdApplicationStateResponse response = _mapper.Map<GetByIdApplicationStateResponse>(applicationState);
-        return new SuccessDataResult<GetByIdApplicationStateResponse>(response, "Listed Succesfully");
+        return new SuccessDataResult<GetByIdApplicationStateResponse>(response, ApplicationStateMessages.ApplicationStateListed);
     }
 
     public IDataResult<UpdateApplicationStateResponse> Update(UpdateApplicationStateRequest request)
@@ -69,6 +70,6 @@ public class ApplicationStateManager : IApplicationStateService
         _applicationStateRepository.Update(applicationState);
 
         UpdateApplicationStateResponse response = _mapper.Map<UpdateApplicationStateResponse>(applicationState);
-        return new SuccessDataResult<UpdateApplicationStateResponse>(response, "Updated Succesfully");
+        return new SuccessDataResult<UpdateApplicationStateResponse>(response, ApplicationStateMessages.ApplicationStateUpdated);
     }
 }

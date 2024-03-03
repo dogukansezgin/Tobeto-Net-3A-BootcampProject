@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Business.Abstracts;
+using Business.Constants.Messages;
 using Business.Requests.Blacklists;
 using Business.Responses.Blacklists;
 using Business.Rules;
@@ -30,7 +31,7 @@ public class BlacklistManager : IBlacklistService
         _blacklistRepository.Add(blacklist);
 
         CreateBlacklistResponse response = _mapper.Map<CreateBlacklistResponse>(blacklist);
-        return new SuccessDataResult<CreateBlacklistResponse>(response, "Added Succesfully");
+        return new SuccessDataResult<CreateBlacklistResponse>(response, BlacklistMessages.BlacklistAdded);
     }
 
     public void CheckExistById(int id)
@@ -48,14 +49,14 @@ public class BlacklistManager : IBlacklistService
         _blacklistBusinessRules.CheckIfBlacklistIdExist(id);
         Blacklist blacklist = _blacklistRepository.Get(x => x.Id == id);
         _blacklistRepository.Delete(blacklist);
-        return new SuccessResult("Deleted Succesfully");
+        return new SuccessResult(BlacklistMessages.BlacklistDeleted);
     }
 
     public IDataResult<List<GetAllBlacklistResponse>> GetAll()
     {
         List<Blacklist> blacklists = _blacklistRepository.GetAll(include: x => x.Include(x => x.Applicant));
         List<GetAllBlacklistResponse> responses = _mapper.Map<List<GetAllBlacklistResponse>>(blacklists);
-        return new SuccessDataResult<List<GetAllBlacklistResponse>>(responses, "Listed Succesfully");
+        return new SuccessDataResult<List<GetAllBlacklistResponse>>(responses, BlacklistMessages.BlacklistListed);
     }
 
     public IDataResult<GetByIdBlacklistResponse> GetById(int id)
@@ -63,7 +64,7 @@ public class BlacklistManager : IBlacklistService
         _blacklistBusinessRules.CheckIfBlacklistIdExist(id);
         Blacklist blacklist = _blacklistRepository.Get(x => x.Id == id, include: x => x.Include(x => x.Applicant));
         GetByIdBlacklistResponse response = _mapper.Map<GetByIdBlacklistResponse>(blacklist);
-        return new SuccessDataResult<GetByIdBlacklistResponse>(response, "Listed Succesfully");
+        return new SuccessDataResult<GetByIdBlacklistResponse>(response, BlacklistMessages.BlacklistListed);
     }
 
     public IDataResult<UpdateBlacklistResponse> Update(UpdateBlacklistRequest request)
@@ -75,6 +76,6 @@ public class BlacklistManager : IBlacklistService
         _blacklistRepository.Update(blacklist);
 
         UpdateBlacklistResponse response = _mapper.Map<UpdateBlacklistResponse>(blacklist);
-        return new SuccessDataResult<UpdateBlacklistResponse>(response, "Updated Succesfully");
+        return new SuccessDataResult<UpdateBlacklistResponse>(response, BlacklistMessages.BlacklistUpdated);
     }
 }

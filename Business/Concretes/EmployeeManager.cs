@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Business.Abstracts;
+using Business.Constants.Messages;
 using Business.Requests.Employees;
 using Business.Responses.Employees;
 using Business.Rules;
@@ -29,7 +30,7 @@ public class EmployeeManager : IEmployeeService
         _employeeRepository.Add(employee);
 
         CreateEmployeeResponse response = _mapper.Map<CreateEmployeeResponse>(employee);
-        return new SuccessDataResult<CreateEmployeeResponse>(response, "Added Succesfully");
+        return new SuccessDataResult<CreateEmployeeResponse>(response, EmployeeMessages.EmployeeAdded);
     }
 
     public IResult Delete(int id)
@@ -37,14 +38,14 @@ public class EmployeeManager : IEmployeeService
         _employeeBusinessRules.CheckIfEmployeeIdExist(id);
         Employee employee = _employeeRepository.Get(x => x.Id == id);
         _employeeRepository.Delete(employee);
-        return new SuccessResult("Deleted Succesfully");
+        return new SuccessResult(EmployeeMessages.EmployeeDeleted);
     }
 
     public IDataResult<List<GetAllEmployeeResponse>> GetAll()
     {
         List<Employee> employees = _employeeRepository.GetAll();
         List<GetAllEmployeeResponse> responses = _mapper.Map<List<GetAllEmployeeResponse>>(employees);
-        return new SuccessDataResult<List<GetAllEmployeeResponse>>(responses, "Listed Succesfully");
+        return new SuccessDataResult<List<GetAllEmployeeResponse>>(responses, EmployeeMessages.EmployeeListed);
     }
 
     public IDataResult<GetByIdEmployeeResponse> GetById(int id)
@@ -52,7 +53,7 @@ public class EmployeeManager : IEmployeeService
         _employeeBusinessRules.CheckIfEmployeeIdExist(id);
         Employee employee = _employeeRepository.Get(x => x.Id == id);
         GetByIdEmployeeResponse response = _mapper.Map<GetByIdEmployeeResponse>(employee);
-        return new SuccessDataResult<GetByIdEmployeeResponse>(response, "Listed Succesfully");
+        return new SuccessDataResult<GetByIdEmployeeResponse>(response, EmployeeMessages.EmployeeListed);
     }
 
     public IDataResult<UpdateEmployeeResponse> Update(UpdateEmployeeRequest request)
@@ -64,6 +65,6 @@ public class EmployeeManager : IEmployeeService
         _employeeRepository.Update(employee);
 
         UpdateEmployeeResponse response = _mapper.Map<UpdateEmployeeResponse>(employee);
-        return new SuccessDataResult<UpdateEmployeeResponse>(response, "Updated Succesfully");
+        return new SuccessDataResult<UpdateEmployeeResponse>(response, EmployeeMessages.EmployeeUpdated);
     }
 }

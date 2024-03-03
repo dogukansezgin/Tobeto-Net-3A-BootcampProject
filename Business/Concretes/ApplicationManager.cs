@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Business.Abstracts;
+using Business.Constants.Messages;
 using Business.Requests.Applications;
 using Business.Responses.Applications;
 using Business.Rules;
@@ -30,7 +31,7 @@ public class ApplicationManager : IApplicationService
         _applicationRepository.Add(application);
 
         CreateApplicationResponse response = _mapper.Map<CreateApplicationResponse>(application);
-        return new SuccessDataResult<CreateApplicationResponse>(response, "Added Succesfully");
+        return new SuccessDataResult<CreateApplicationResponse>(response, ApplicationMessages.ApplicationAdded);
     }
 
     public IResult Delete(int id)
@@ -38,14 +39,14 @@ public class ApplicationManager : IApplicationService
         _applicationBusinessRules.CheckIfApplicationIdExist(id);
         Application application = _applicationRepository.Get(x => x.Id == id);
         _applicationRepository.Delete(application);
-        return new SuccessResult("Deleted Succesfully");
+        return new SuccessResult(ApplicationMessages.ApplicationDeleted);
     }
 
     public IDataResult<List<GetAllApplicationResponse>> GetAll()
     {
         List<Application> applications = _applicationRepository.GetAll(include: x => x.Include(x => x.Applicant).Include(x => x.ApplicationState).Include(x => x.Bootcamp));
         List<GetAllApplicationResponse> responses = _mapper.Map<List<GetAllApplicationResponse>>(applications);
-        return new SuccessDataResult<List<GetAllApplicationResponse>>(responses, "Listed Succesfully");
+        return new SuccessDataResult<List<GetAllApplicationResponse>>(responses, ApplicationMessages.ApplicationListed);
     }
 
     public IDataResult<GetByIdApplicationResponse> GetById(int id)
@@ -53,7 +54,7 @@ public class ApplicationManager : IApplicationService
         _applicationBusinessRules.CheckIfApplicationIdExist(id);
         Application application = _applicationRepository.Get(x => x.Id == id, include: x => x.Include(x => x.Applicant).Include(x => x.ApplicationState).Include(x => x.Bootcamp));
         GetByIdApplicationResponse response = _mapper.Map<GetByIdApplicationResponse>(application);
-        return new SuccessDataResult<GetByIdApplicationResponse>(response, "Listed Succesfully");
+        return new SuccessDataResult<GetByIdApplicationResponse>(response, ApplicationMessages.ApplicationListed);
     }
 
     public IDataResult<UpdateApplicationResponse> Update(UpdateApplicationRequest request)
@@ -65,6 +66,6 @@ public class ApplicationManager : IApplicationService
         _applicationRepository.Update(application);
 
         UpdateApplicationResponse response = _mapper.Map<UpdateApplicationResponse>(application);
-        return new SuccessDataResult<UpdateApplicationResponse>(response, "Updated Succesfully");
+        return new SuccessDataResult<UpdateApplicationResponse>(response, ApplicationMessages.ApplicationUpdated);
     }
 }

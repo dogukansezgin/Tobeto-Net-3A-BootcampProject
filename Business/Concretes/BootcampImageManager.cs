@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Business.Abstracts;
+using Business.Constants.Messages;
 using Business.Requests.BootcampImages;
 using Business.Responses.BootcampImages;
 using Core.Utilities.Results;
@@ -26,28 +27,28 @@ public class BootcampImageManager : IBootcampImageService
         _bootcampImageRepository.Add(bootcampImage);
 
         CreateBootcampImageResponse response = _mapper.Map<CreateBootcampImageResponse>(bootcampImage);
-        return new SuccessDataResult<CreateBootcampImageResponse>(response, "Added Succesfully");
+        return new SuccessDataResult<CreateBootcampImageResponse>(response, BootcampImageMessages.BootcampImageAdded);
     }
 
     public IResult Delete(Guid id)
     {
         BootcampImage bootcampImage = _bootcampImageRepository.Get(x => x.Id == id);
         _bootcampImageRepository.Delete(bootcampImage);
-        return new SuccessResult("Deleted Succesfully");
+        return new SuccessResult(BootcampImageMessages.BootcampImageDeleted);
     }
 
     public IDataResult<List<GetAllBootcampImageResponse>> GetAll()
     {
         List<BootcampImage> bootcampImage = _bootcampImageRepository.GetAll(include: x => x.Include(x => x.Bootcamp));
         List<GetAllBootcampImageResponse> responses = _mapper.Map<List<GetAllBootcampImageResponse>>(bootcampImage);
-        return new SuccessDataResult<List<GetAllBootcampImageResponse>>(responses, "Listed Succesfully");
+        return new SuccessDataResult<List<GetAllBootcampImageResponse>>(responses, BootcampImageMessages.BootcampImageListed);
     }
 
     public IDataResult<GetByIdBootcampImageResponse> GetById(Guid id)
     {
         BootcampImage bootcampImage = _bootcampImageRepository.Get(x => x.Id == id, include: x => x.Include(x => x.Bootcamp));
         GetByIdBootcampImageResponse response = _mapper.Map<GetByIdBootcampImageResponse>(bootcampImage);
-        return new SuccessDataResult<GetByIdBootcampImageResponse>(response, "Listed Succesfully");
+        return new SuccessDataResult<GetByIdBootcampImageResponse>(response, BootcampImageMessages.BootcampImageListed);
     }
 
     public IDataResult<UpdateBootcampImageResponse> Update(UpdateBootcampImageRequest request)
@@ -59,6 +60,6 @@ public class BootcampImageManager : IBootcampImageService
         _bootcampImageRepository.Update(bootcampImage);
 
         UpdateBootcampImageResponse response = _mapper.Map<UpdateBootcampImageResponse>(bootcampImage);
-        return new SuccessDataResult<UpdateBootcampImageResponse>(response, "Updated Succesfully");
+        return new SuccessDataResult<UpdateBootcampImageResponse>(response, BootcampImageMessages.BootcampImageUpdated);
     }
 }
