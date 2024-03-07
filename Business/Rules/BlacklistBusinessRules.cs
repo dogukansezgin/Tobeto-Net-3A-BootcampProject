@@ -20,7 +20,7 @@ public class BlacklistBusinessRules : BaseBusinessRules
 
     public Blacklist CheckBlacklistUpdate(Blacklist blacklist, UpdateBlacklistRequest request)
     {
-        blacklist.ApplicantId = (int)(request.ApplicantId != 0 || request.ApplicantId == null ? request.ApplicantId : blacklist.ApplicantId);
+        blacklist.ApplicantId = (Guid)(request.ApplicantId == null ? request.ApplicantId : blacklist.ApplicantId);
         blacklist.Reason = request.Reason != "string" || request.Reason == null ? request.Reason : blacklist.Reason;
         //blacklist.Date ??
 
@@ -39,7 +39,7 @@ public class BlacklistBusinessRules : BaseBusinessRules
         if (isExist) throw new BusinessException("Blacklist is not exists.");
     }
 
-    public void CheckIfApplicantBlacklisted(int applicantId)
+    public void CheckIfApplicantBlacklisted(Guid applicantId)
     {
         var isInBlacklist = _blacklistRepository.Get(x => x.ApplicantId == applicantId) is not null;
         if (isInBlacklist) throw new BusinessException("Applicant is blacklisted.");

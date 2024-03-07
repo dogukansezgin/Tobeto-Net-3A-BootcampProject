@@ -39,7 +39,7 @@ public class BlacklistManager : IBlacklistService
         _blacklistBusinessRules.CheckIfBlacklistIdExist(id);
     }
 
-    public void CheckIfApplicantBlacklisted(int applicantId)
+    public void CheckIfApplicantBlacklisted(Guid applicantId)
     {
         _blacklistBusinessRules.CheckIfApplicantBlacklisted(applicantId);
     }

@@ -3,6 +3,6 @@ using Entities.Concretes;
 
 namespace DataAccess.Abstracts;
 
-public interface IEmployeeRepository : ISyncRepository<Employee, int>
+public interface IEmployeeRepository : ISyncRepository<Employee, Guid>
 {
 }

@@ -26,7 +26,7 @@ public class ApplicationBusinessRules : BaseBusinessRules
 
     public Application CheckApplicationUpdate(Application application, UpdateApplicationRequest request)
     {
-        application.ApplicantId = request.ApplicantId != 0 || request.ApplicantId == null ? request.ApplicantId : application.ApplicantId;
+        application.ApplicantId = request.ApplicantId == null ? request.ApplicantId : application.ApplicantId;
         application.BootcampId = request.BootcampId != 0 || request.BootcampId == null ? request.BootcampId : application.BootcampId;
         application.ApplicationStateId = request.ApplicationStateId != 0 || request.ApplicationStateId == null ? request.ApplicationStateId : application.ApplicationStateId;
 

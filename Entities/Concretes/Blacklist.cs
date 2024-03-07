@@ -4,7 +4,7 @@ namespace Entities.Concretes;
 
 public class Blacklist : BaseEntity<int>
 {
-    public int ApplicantId { get; set; }
+    public Guid ApplicantId { get; set; }
     public string Reason { get; set; }
     public DateTime Date { get; set; }
 
@@ -14,7 +14,7 @@ public class Blacklist : BaseEntity<int>
         
     }
 
-    public Blacklist(int id, int applicantId, string reason, DateTime date)
+    public Blacklist(int id, Guid applicantId, string reason, DateTime date)
     {
         Id = id;
         ApplicantId = applicantId;

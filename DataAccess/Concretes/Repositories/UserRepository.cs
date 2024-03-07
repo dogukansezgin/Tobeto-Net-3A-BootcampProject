@@ -1,12 +1,11 @@
 ﻿using Core.DataAccess.EntityFramework;
+using Core.Utilities.Security.Entities;
 using DataAccess.Abstracts;
 using DataAccess.Concretes.EntityFramework.Contexts;
-using Entities.Concretes;
-using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.Concretes.Repositories;
 
-public class UserRepository : EfRepositoryBase<User, int, BaseDbContext>, IUserRepository
+public class UserRepository : EfRepositoryBase<User, Guid, BaseDbContext>, IUserRepository
 {
     public UserRepository(BaseDbContext context) : base(context)
     {

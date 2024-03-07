@@ -29,7 +29,7 @@ public class ApplicantBusinessRules : BaseBusinessRules
         return applicant;
     }
 
-    public void CheckIfApplicantIdExist(int id)
+    public void CheckIfApplicantIdExist(Guid id)
     {
         var isExist = _applicantRepository.Get(x => x.Id == id) is null;
         if (isExist) throw new BusinessException("Applicant is not exists.");

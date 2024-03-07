@@ -37,12 +37,12 @@ public class ApplicantManager : IApplicantService
         return new SuccessDataResult<CreateApplicantResponse>(response, ApplicantMessages.ApplicantAdded);
     }
 
-    public void CheckExistById(int id)
+    public void CheckExistById(Guid id)
     {
         _applicantBusinessRules.CheckIfApplicantIdExist(id);
     }
 
-    public IResult Delete(int id)
+    public IResult Delete(Guid id)
     {
         _applicantBusinessRules.CheckIfApplicantIdExist(id);
 
@@ -59,7 +59,7 @@ public class ApplicantManager : IApplicantService
         return new SuccessDataResult<List<GetAllApplicantResponse>>(responses, ApplicantMessages.ApplicantListed);
     }
 
-    public IDataResult<GetByIdApplicantResponse> GetById(int id)
+    public IDataResult<GetByIdApplicantResponse> GetById(Guid id)
     {
         _applicantBusinessRules.CheckIfApplicantIdExist(id);
 

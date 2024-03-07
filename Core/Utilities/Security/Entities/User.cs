@@ -1,8 +1,8 @@
 ﻿using Core.Entities;
 
-namespace Entities.Concretes;
+namespace Core.Utilities.Security.Entities;
 
-public class User : BaseEntity<int>
+public class User : BaseEntity<Guid>
 {
     public string UserName { get; set; }
     public string FirstName { get; set; }
@@ -15,7 +15,7 @@ public class User : BaseEntity<int>
     {
         
     }
-    public User(int id, string userName, string firstName, string lastName, DateTime dateOfBirth, string nationalIdentity, string email, string password)
+    public User(Guid id, string userName, string firstName, string lastName, DateTime dateOfBirth, string nationalIdentity, string email, string password)
     {
         Id = id;
         UserName = userName;

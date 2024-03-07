@@ -29,7 +29,7 @@ public class InstructorBusinessRules : BaseBusinessRules
         return instructor;
     }
 
-    public void CheckIfInstructorIdExist(int id)
+    public void CheckIfInstructorIdExist(Guid id)
     {
         var isExist = _instructorRepository.Get(x => x.Id == id) is null;
         if (isExist) throw new BusinessException("Instructor is not exists.");

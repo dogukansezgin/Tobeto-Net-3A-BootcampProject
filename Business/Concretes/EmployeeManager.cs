@@ -33,7 +33,7 @@ public class EmployeeManager : IEmployeeService
         return new SuccessDataResult<CreateEmployeeResponse>(response, EmployeeMessages.EmployeeAdded);
     }
 
-    public IResult Delete(int id)
+    public IResult Delete(Guid id)
     {
         _employeeBusinessRules.CheckIfEmployeeIdExist(id);
         Employee employee = _employeeRepository.Get(x => x.Id == id);
@@ -48,7 +48,7 @@ public class EmployeeManager : IEmployeeService
         return new SuccessDataResult<List<GetAllEmployeeResponse>>(responses, EmployeeMessages.EmployeeListed);
     }
 
-    public IDataResult<GetByIdEmployeeResponse> GetById(int id)
+    public IDataResult<GetByIdEmployeeResponse> GetById(Guid id)
     {
         _employeeBusinessRules.CheckIfEmployeeIdExist(id);
         Employee employee = _employeeRepository.Get(x => x.Id == id);

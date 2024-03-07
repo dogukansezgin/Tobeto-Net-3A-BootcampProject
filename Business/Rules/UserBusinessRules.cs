@@ -1,8 +1,8 @@
 ﻿using Business.Requests.Users;
 using Core.CrossCuttingConcerns.Rules;
 using Core.Exceptions.Types;
+using Core.Utilities.Security.Entities;
 using DataAccess.Abstracts;
-using Entities.Concretes;
 
 namespace Business.Rules;
 
@@ -27,7 +27,7 @@ public class UserBusinessRules : BaseBusinessRules
         return user;
     }
 
-    public void CheckIfUserIdExist(int id)
+    public void CheckIfUserIdExist(Guid id)
     {
         var isExist = _userRepository.Get(x => x.Id == id) is null;
         if (isExist) throw new BusinessException("User is not exists.");

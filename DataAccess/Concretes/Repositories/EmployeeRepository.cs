@@ -5,7 +5,7 @@ using Entities.Concretes;
 
 namespace DataAccess.Concretes.Repositories;
 
-public class EmployeeRepository : EfRepositoryBase<Employee, int, BaseDbContext>, IEmployeeRepository
+public class EmployeeRepository : EfRepositoryBase<Employee, Guid, BaseDbContext>, IEmployeeRepository
 {
     public EmployeeRepository(BaseDbContext context) : base(context)
     {

@@ -1,4 +1,4 @@
-﻿using Core.Entities;
+﻿using Core.Utilities.Security.Entities;
 
 namespace Entities.Concretes;
 

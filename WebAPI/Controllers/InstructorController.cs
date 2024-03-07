@@ -23,7 +23,7 @@ namespace WebAPI.Controllers
 
 
         [HttpDelete("{id}")]
-        public IActionResult Delete([FromRoute] int id)
+        public IActionResult Delete([FromRoute] Guid id)
         {
             return HandleResult(_instructorService.Delete(id));
         }
@@ -41,7 +41,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet("{id}")]
-        public IActionResult GetById([FromRoute] int id)
+        public IActionResult GetById([FromRoute] Guid id)
         {
             return HandleDataResult(_instructorService.GetById(id));
         }

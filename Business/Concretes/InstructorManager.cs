@@ -33,12 +33,12 @@ public class InstructorManager : IInstructorService
         return new SuccessDataResult<CreateInstructorResponse>(response, InstructorMessages.InstructorAdded);
     }
 
-    public void CheckExistById(int id)
+    public void CheckExistById(Guid id)
     {
         _instructorBusinessRules.CheckIfInstructorIdExist(id);
     }
 
-    public IResult Delete(int id)
+    public IResult Delete(Guid id)
     {
         _instructorBusinessRules.CheckIfInstructorIdExist(id);
         Instructor instructor = _instructorRepository.Get(x => x.Id == id);
@@ -53,7 +53,7 @@ public class InstructorManager : IInstructorService
         return new SuccessDataResult<List<GetAllInstructorResponse>>(responses, InstructorMessages.InstructorListed);
     }
 
-    public IDataResult<GetByIdInstructorResponse> GetById(int id)
+    public IDataResult<GetByIdInstructorResponse> GetById(Guid id)
     {
         _instructorBusinessRules.CheckIfInstructorIdExist(id);
         Instructor instructor = _instructorRepository.Get(x => x.Id == id);

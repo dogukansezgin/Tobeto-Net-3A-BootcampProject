@@ -4,7 +4,7 @@ namespace Entities.Concretes;
 
 public class Application : BaseEntity<int>
 {
-    public int ApplicantId { get; set; }
+    public Guid ApplicantId { get; set; }
     public int BootcampId { get; set; }
     public int ApplicationStateId { get; set; }
 
@@ -17,7 +17,7 @@ public class Application : BaseEntity<int>
         
     }
 
-    public Application(int id, int applicantId, int bootcampId, int applicationStateId)
+    public Application(int id, Guid applicantId, int bootcampId, int applicationStateId)
     {
         Id = id;
         ApplicantId = applicantId;

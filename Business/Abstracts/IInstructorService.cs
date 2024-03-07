@@ -7,10 +7,10 @@ namespace Business.Abstracts;
 public interface IInstructorService
 {
     IDataResult<CreateInstructorResponse> Add(CreateInstructorRequest request);
-    IResult Delete(int id);
+    IResult Delete(Guid id);
     IDataResult<UpdateInstructorResponse> Update(UpdateInstructorRequest request);
-    IDataResult<GetByIdInstructorResponse> GetById(int id);
+    IDataResult<GetByIdInstructorResponse> GetById(Guid id);
     IDataResult<List<GetAllInstructorResponse>> GetAll();
-    void CheckExistById(int id);
+    void CheckExistById(Guid id);
 
 }

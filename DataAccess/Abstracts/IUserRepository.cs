@@ -1,9 +1,9 @@
 ﻿using Core.DataAccess;
-using Entities.Concretes;
+using Core.Utilities.Security.Entities;
 
 namespace DataAccess.Abstracts;
 
-public interface IUserRepository : ISyncRepository<User, int>
+public interface IUserRepository : ISyncRepository<User, Guid>
 {
 
 }

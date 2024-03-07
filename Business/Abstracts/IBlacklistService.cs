@@ -12,5 +12,5 @@ public interface IBlacklistService
     IDataResult<GetByIdBlacklistResponse> GetById(int id);
     IDataResult<List<GetAllBlacklistResponse>> GetAll();
     void CheckExistById(int id);
-    void CheckIfApplicantBlacklisted(int applicantId);
+    void CheckIfApplicantBlacklisted(Guid applicantId);
 }

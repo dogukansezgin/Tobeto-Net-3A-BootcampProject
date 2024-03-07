@@ -8,9 +8,9 @@ namespace Business.Abstracts;
 public interface IApplicantService
 {
     IDataResult<CreateApplicantResponse> Add(CreateApplicantRequest request);
-    IResult Delete(int id);
+    IResult Delete(Guid id);
     IDataResult<UpdateApplicantResponse> Update(UpdateApplicantRequest request);
-    IDataResult<GetByIdApplicantResponse> GetById(int id);
+    IDataResult<GetByIdApplicantResponse> GetById(Guid id);
     IDataResult<List<GetAllApplicantResponse>> GetAll();
-    void CheckExistById(int id);
+    void CheckExistById(Guid id);
 }

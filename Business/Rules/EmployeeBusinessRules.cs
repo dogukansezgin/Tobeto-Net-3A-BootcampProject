@@ -29,7 +29,7 @@ public class EmployeeBusinessRules : BaseBusinessRules
         return employee;
     }
 
-    public void CheckIfEmployeeIdExist(int id)
+    public void CheckIfEmployeeIdExist(Guid id)
     {
         var isExist = _employeeRepository.Get(x => x.Id == id) is null;
         if (isExist) throw new BusinessException("Employee is not exists.");

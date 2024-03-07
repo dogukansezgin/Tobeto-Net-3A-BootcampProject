@@ -7,8 +7,8 @@ namespace Business.Abstracts;
 public interface IEmployeeService
 {
     IDataResult<CreateEmployeeResponse> Add(CreateEmployeeRequest request);
-    IResult Delete(int id);
+    IResult Delete(Guid id);
     IDataResult<UpdateEmployeeResponse> Update(UpdateEmployeeRequest request);
-    IDataResult<GetByIdEmployeeResponse> GetById(int id);
+    IDataResult<GetByIdEmployeeResponse> GetById(Guid id);
     IDataResult<List<GetAllEmployeeResponse>> GetAll();
 }

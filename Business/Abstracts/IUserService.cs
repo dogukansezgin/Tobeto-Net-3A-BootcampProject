@@ -7,8 +7,8 @@ namespace Business.Abstracts;
 public interface IUserService
 {
     IDataResult<CreateUserResponse> Add(CreateUserRequest request);
-    IResult Delete(int id);
+    IResult Delete(Guid id);
     IDataResult<UpdateUserResponse> Update(UpdateUserRequest request);
-    IDataResult<GetByIdUserResponse> GetById(int id);
+    IDataResult<GetByIdUserResponse> GetById(Guid id);
     IDataResult<List<GetAllUserResponse>> GetAll();
 }

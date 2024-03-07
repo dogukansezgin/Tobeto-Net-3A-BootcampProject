@@ -1,5 +1,4 @@
-﻿using Core.Entities;
-using System.Security.Cryptography;
+﻿using Core.Utilities.Security.Entities;
 
 namespace Entities.Concretes;
 

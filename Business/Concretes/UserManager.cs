@@ -5,8 +5,8 @@ using Business.Requests.Users;
 using Business.Responses.Users;
 using Business.Rules;
 using Core.Utilities.Results;
+using Core.Utilities.Security.Entities;
 using DataAccess.Abstracts;
-using Entities.Concretes;
 
 namespace Business.Concretes;
 
@@ -33,7 +33,7 @@ public class UserManager : IUserService
         return new SuccessDataResult<CreateUserResponse>(response, UserMessages.UserAdded);
     }
 
-    public IResult Delete(int id)
+    public IResult Delete(Guid id)
     {
         _userBusinessRules.CheckIfUserIdExist(id);
         User user = _userRepository.Get(x => x.Id == id);
@@ -48,7 +48,7 @@ public class UserManager : IUserService
         return new SuccessDataResult<List<GetAllUserResponse>>(responses, UserMessages.UserListed);
     }
 
-    public IDataResult<GetByIdUserResponse> GetById(int id)
+    public IDataResult<GetByIdUserResponse> GetById(Guid id)
     {
         _userBusinessRules.CheckIfUserIdExist(id);
         User user = _userRepository.Get(x => x.Id == id);
