@@ -5,7 +5,7 @@ using Business.Requests.Users;
 using Business.Responses.Users;
 using Business.Rules;
 using Core.Utilities.Results;
-using Core.Utilities.Security.Entities;
+using Entities.Concretes;
 using DataAccess.Abstracts;
 
 namespace Business.Concretes;

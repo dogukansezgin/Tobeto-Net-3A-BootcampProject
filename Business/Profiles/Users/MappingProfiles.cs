@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Business.Requests.Users;
 using Business.Responses.Users;
-using Core.Utilities.Security.Entities;
+using Entities.Concretes;
 
 namespace Business.Profiles.Users;
 

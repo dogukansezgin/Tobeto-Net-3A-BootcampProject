@@ -4,26 +4,20 @@ namespace Core.Utilities.Security.Entities;
 
 public class User : BaseEntity<Guid>
 {
-    public string UserName { get; set; }
-    public string FirstName { get; set; }
-    public string LastName { get; set; }
-    public DateTime DateOfBirth { get; set; }
-    public string NationalIdentity { get; set; }
     public string Email { get; set; }
-    public string Password { get; set; }
+    public byte[] PasswordHash { get; set; }
+    public byte[] PasswordSalt { get; set; }
+
     public User()
     {
         
     }
-    public User(Guid id, string userName, string firstName, string lastName, DateTime dateOfBirth, string nationalIdentity, string email, string password)
+
+    public User(Guid id, string email, byte[] passwordHash, byte[] passwordSalt)
     {
         Id = id;
-        UserName = userName;
-        FirstName = firstName;
-        LastName = lastName;
-        DateOfBirth = dateOfBirth;
-        NationalIdentity = nationalIdentity;
         Email = email;
-        Password = password;
+        PasswordHash = passwordHash;
+        PasswordSalt = passwordSalt;
     }
 }
