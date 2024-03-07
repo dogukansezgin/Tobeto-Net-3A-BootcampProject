@@ -4,6 +4,8 @@ using Business.Constants.Messages;
 using Business.Requests.Applicants;
 using Business.Responses.Applicants;
 using Business.Rules;
+using Core.Aspects.Autofac.Logging;
+using Core.CrossCuttingConcerns.Logging.Serilog.Loggers;
 using Core.Exceptions.Types;
 using Core.Utilities.Results;
 using DataAccess.Abstracts;
@@ -24,6 +26,7 @@ public class ApplicantManager : IApplicantService
         _mapper = mapper;
     }
 
+    [LogAspect(typeof(MongoDbLogger))]
     public IDataResult<CreateApplicantResponse> Add(CreateApplicantRequest request)
     {
         Applicant applicant = _mapper.Map<Applicant>(request);
@@ -48,6 +51,7 @@ public class ApplicantManager : IApplicantService
         return new SuccessResult(ApplicantMessages.ApplicantDeleted);
     }
 
+    [LogAspect(typeof(MssqlLogger))]
     public IDataResult<List<GetAllApplicantResponse>> GetAll()
     {
         List<Applicant> applicants = _applicantRepository.GetAll();
