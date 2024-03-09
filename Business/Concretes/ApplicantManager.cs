@@ -6,7 +6,6 @@ using Business.Responses.Applicants;
 using Business.Rules;
 using Core.Aspects.Autofac.Logging;
 using Core.CrossCuttingConcerns.Logging.Serilog.Loggers;
-using Core.Exceptions.Types;
 using Core.Utilities.Results;
 using DataAccess.Abstracts;
 using Entities.Concretes;

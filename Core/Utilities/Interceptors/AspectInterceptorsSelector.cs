@@ -3,7 +3,7 @@ using System.Reflection;
 
 namespace Core.Utilities.Interceptors;
 
-public class AspectInterceptorSelector : IInterceptorSelector
+public class AspectInterceptorsSelector : IInterceptorSelector
 {
     public IInterceptor[] SelectInterceptors(Type type, MethodInfo method, IInterceptor[] interceptors)
     {

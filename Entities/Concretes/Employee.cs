@@ -1,4 +1,6 @@
-﻿namespace Entities.Concretes;
+﻿using Core.Utilities.Security.Entities;
+
+namespace Entities.Concretes;
 
 public class Employee : User
 {

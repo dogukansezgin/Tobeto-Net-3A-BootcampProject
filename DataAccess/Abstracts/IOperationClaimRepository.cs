@@ -3,7 +3,6 @@ using Core.Utilities.Security.Entities;
 
 namespace DataAccess.Abstracts;
 
-public interface IUserRepository : ISyncRepository<User, Guid>
+public interface IOperationClaimRepository : ISyncRepository<OperationClaim, int>
 {
-
 }

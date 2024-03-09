@@ -3,7 +3,7 @@
 public class GetAllInstructorImageResponse
 {
     public Guid Id { get; set; }
-    public int InstructorId { get; set; }
+    public Guid InstructorId { get; set; }
     public string InstructorUserName { get; set; }
     public string InstructorFirstName { get; set; }
     public string InstructorLastName { get; set; }

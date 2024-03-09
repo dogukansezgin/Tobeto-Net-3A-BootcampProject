@@ -1,4 +1,5 @@
-﻿using Entities.Concretes;
+﻿using Core.Utilities.Security.Entities;
+using Entities.Concretes;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -22,5 +23,6 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
         builder.Property(x => x.UpdatedDate).HasColumnName("UpdatedDate");
         builder.Property(x => x.DeletedDate).HasColumnName("DeletedDate");
 
+        builder.HasMany(x => x.UserOperationClaims);
     }
 }

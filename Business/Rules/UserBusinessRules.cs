@@ -1,7 +1,7 @@
 ﻿using Business.Requests.Users;
 using Core.CrossCuttingConcerns.Rules;
 using Core.Exceptions.Types;
-using Entities.Concretes;
+using Core.Utilities.Security.Entities;
 using DataAccess.Abstracts;
 
 namespace Business.Rules;

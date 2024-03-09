@@ -4,7 +4,7 @@ namespace Entities.Concretes;
 
 public class InstructorImage : BaseEntity<Guid>
 {
-    public int InstructorId { get; set; }
+    public Guid InstructorId { get; set; }
     public string ImagePath { get; set; }
 
     public virtual Instructor Instructor { get; set; }
@@ -14,10 +14,10 @@ public class InstructorImage : BaseEntity<Guid>
         
     }
 
-    public InstructorImage(Guid id, int ınstructorId, string ımagePath)
+    public InstructorImage(Guid id, Guid instructorId, string ımagePath)
     {
         Id = id;
-        InstructorId = ınstructorId;
+        InstructorId = instructorId;
         ImagePath = ımagePath;
     }
 }

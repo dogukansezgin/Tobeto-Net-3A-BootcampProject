@@ -5,9 +5,10 @@ using DataAccess.Concretes.EntityFramework.Contexts;
 
 namespace DataAccess.Concretes.Repositories;
 
-public class UserRepository : EfRepositoryBase<User, Guid, BaseDbContext>, IUserRepository
+public class UserOperationClaimRepository : EfRepositoryBase<UserOperationClaim, int, BaseDbContext>, IUserOperationClaimRepository
 {
-    public UserRepository(BaseDbContext context) : base(context)
+    public UserOperationClaimRepository(BaseDbContext context) : base(context)
     {
     }
 }
+

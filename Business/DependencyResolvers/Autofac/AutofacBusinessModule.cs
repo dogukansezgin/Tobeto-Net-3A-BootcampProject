@@ -15,7 +15,7 @@ public class AutofacBusinessModule : Module
             .AsImplementedInterfaces()
             .EnableInterfaceInterceptors(new ProxyGenerationOptions()
             {
-                Selector = new AspectInterceptorSelector()
+                Selector = new AspectInterceptorsSelector()
             }).SingleInstance();
     }
 }

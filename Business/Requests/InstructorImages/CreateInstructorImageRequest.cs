@@ -2,6 +2,6 @@
 
 public class CreateInstructorImageRequest
 {
-    public int InstructorId { get; set; }
+    public Guid InstructorId { get; set; }
     public string ImagePath { get; set; }
 }

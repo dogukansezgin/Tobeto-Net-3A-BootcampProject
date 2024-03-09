@@ -1,4 +1,5 @@
-﻿using Entities.Concretes;
+﻿using Core.Utilities.Security.Entities;
+using Entities.Concretes;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System.Reflection;
@@ -19,6 +20,8 @@ public class BaseDbContext : DbContext
     public DbSet<BootcampState> BootcampStates { get; set; }
     public DbSet<BootcampImage> BootcampImages { get; set; }
     public DbSet<Blacklist> Blacklists { get; set; }
+    public DbSet<OperationClaim> OperationClaims { get; set; }
+    public DbSet<UserOperationClaim> UserOperationClaims { get; set; }
 
     public BaseDbContext(DbContextOptions dbContextOptions, IConfiguration configuration) : base(dbContextOptions)
     {
