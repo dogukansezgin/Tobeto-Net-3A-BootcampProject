@@ -1,6 +1,10 @@
 ﻿using AutoMapper;
+using Business.Requests.Applicants;
+using Business.Requests.Employees;
+using Business.Requests.Instructors;
 using Business.Requests.Users;
 using Business.Responses.Users;
+using Core.Utilities.Security.Dtos;
 using Core.Utilities.Security.Entities;
 
 namespace Business.Profiles.Users;
