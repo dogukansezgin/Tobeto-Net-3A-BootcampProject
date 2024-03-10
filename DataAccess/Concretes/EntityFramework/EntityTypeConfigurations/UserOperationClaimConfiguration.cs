@@ -12,6 +12,9 @@ public class UserOperationClaimConfiguration : IEntityTypeConfiguration<UserOper
         builder.Property(x => x.Id).HasColumnName("Id");
         builder.Property(x => x.UserId).HasColumnName("UserId");
         builder.Property(x => x.OperationClaimId).HasColumnName("OperationClaimId");
+        builder.Property(x => x.CreatedDate).HasColumnName("CreatedDate");
+        builder.Property(x => x.UpdatedDate).HasColumnName("UpdatedDate");
+        builder.Property(x => x.DeletedDate).HasColumnName("DeletedDate");
 
         builder.HasOne(x => x.User);
         builder.HasOne(x => x.OperationClaim);

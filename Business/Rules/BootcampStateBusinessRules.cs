@@ -17,7 +17,7 @@ public class BootcampStateBusinessRules : BaseBusinessRules
 
     public BootcampState CheckBootcampStateUpdate(BootcampState bootcampState, UpdateBootcampStateRequest request)
     {
-        bootcampState.Name = request.Name != "string" || request.Name == null ? request.Name : bootcampState.Name;
+        bootcampState.Name = request.Name != "string" || request.Name != null ? request.Name : bootcampState.Name;
 
         bootcampState.UpdatedDate = DateTime.UtcNow;
         return bootcampState;

@@ -17,7 +17,7 @@ public class ApplicationStateBusinessRules : BaseBusinessRules
 
     public ApplicationState CheckApplicationStateUpdate(ApplicationState applicationState, UpdateApplicationStateRequest request)
     {
-        applicationState.Name = request.Name != "string" || request.Name == null ? request.Name : applicationState.Name;
+        applicationState.Name = request.Name != "string" || request.Name != null ? request.Name : applicationState.Name;
 
         applicationState.UpdatedDate = DateTime.UtcNow;
         return applicationState;

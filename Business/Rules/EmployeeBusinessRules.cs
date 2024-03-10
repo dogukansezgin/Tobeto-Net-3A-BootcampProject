@@ -17,12 +17,16 @@ public class EmployeeBusinessRules : BaseBusinessRules
 
     public Employee CheckEmployeeUpdate(Employee employee, UpdateEmployeeRequest request)
     {
-        employee.UserName = request.UserName != "string" || request.UserName == null ? request.UserName : employee.UserName;
-        employee.FirstName = request.FirstName != "string" || request.FirstName == null ? request.FirstName : employee.FirstName;
-        employee.LastName = request.LastName != "string" || request.LastName == null ? request.LastName : employee.LastName;
-        employee.Position = request.Position != "string" || request.Position == null ? request.Position : employee.Position;
-        employee.NationalIdentity = request.NationalIdentity != "string" || request.NationalIdentity == null ? request.NationalIdentity : employee.NationalIdentity;
-        employee.Email = request.Email != "string" || request.Email == null ? request.Email : employee.Email;
+        employee.UserName = request.UserName != "string" || request.UserName != null ? request.UserName : employee.UserName;
+        employee.FirstName = request.FirstName != "string" || request.FirstName != null ? request.FirstName : employee.FirstName;
+        employee.LastName = request.LastName != "string" || request.LastName != null ? request.LastName : employee.LastName;
+        employee.Position = request.Position != "string" || request.Position != null ? request.Position : employee.Position;
+        employee.NationalIdentity = request.NationalIdentity != "string" || request.NationalIdentity != null ? request.NationalIdentity : employee.NationalIdentity;
+        employee.Email = request.Email != "string" || request.Email != null ? request.Email : employee.Email;
+        var passwordHash = request.PasswordHash.ToString();
+        employee.PasswordHash = passwordHash != "string" || request.PasswordHash != null ? request.PasswordHash : employee.PasswordHash;
+        var passwordSalt = request.PasswordSalt.ToString();
+        employee.PasswordSalt = passwordSalt != "string" || request.PasswordSalt != null ? request.PasswordSalt : employee.PasswordSalt;
         //employee.DateOfBirth eklenecek.
 
         employee.UpdatedDate = DateTime.UtcNow;

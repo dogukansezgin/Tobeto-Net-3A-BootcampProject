@@ -1,5 +1,6 @@
 ﻿using Business.Abstracts;
 using Business.Requests.ApplicationStates;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Controllers
@@ -34,6 +35,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "applicationState.getAll")]
         public IActionResult GetAll()
         {
             return HandleDataResult(_applicationStateService.GetAll());

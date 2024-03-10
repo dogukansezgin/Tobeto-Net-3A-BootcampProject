@@ -20,8 +20,9 @@ public class BlacklistBusinessRules : BaseBusinessRules
 
     public Blacklist CheckBlacklistUpdate(Blacklist blacklist, UpdateBlacklistRequest request)
     {
-        blacklist.ApplicantId = (Guid)(request.ApplicantId == null ? request.ApplicantId : blacklist.ApplicantId);
-        blacklist.Reason = request.Reason != "string" || request.Reason == null ? request.Reason : blacklist.Reason;
+        var applicantId = request.ApplicantId.ToString();
+        blacklist.ApplicantId = (Guid)(applicantId != "string" || request.ApplicantId != null ? request.ApplicantId : blacklist.ApplicantId);
+        blacklist.Reason = request.Reason != "string" || request.Reason != null ? request.Reason : blacklist.Reason;
         //blacklist.Date ??
 
         blacklist.UpdatedDate = DateTime.UtcNow;

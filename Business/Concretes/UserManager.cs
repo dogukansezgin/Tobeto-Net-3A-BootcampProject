@@ -56,6 +56,12 @@ public class UserManager : IUserService
         return new SuccessDataResult<GetByIdUserResponse>(response, UserMessages.UserListed);
     }
 
+    public IDataResult<User> GetByMail(string mail)
+    {
+        User user = _userRepository.Get(x => x.Email == mail);
+        return new SuccessDataResult<User>(user, UserMessages.UserListed);
+    }
+
     public IDataResult<UpdateUserResponse> Update(UpdateUserRequest request)
     {
         _userBusinessRules.CheckIfUserIdExist(request.Id);

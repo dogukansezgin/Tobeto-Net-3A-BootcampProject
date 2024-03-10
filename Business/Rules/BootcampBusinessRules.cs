@@ -22,9 +22,10 @@ public class BootcampBusinessRules : BaseBusinessRules
 
     public Bootcamp CheckBootcampUpdate(Bootcamp bootcamp, UpdateBootcampRequest request)
     {
-        bootcamp.Name = request.Name != "string" || request.Name == null ? request.Name : bootcamp.Name;
-        bootcamp.InstructorId = (Guid)(request.InstructorId == null ? request.InstructorId : bootcamp.InstructorId);
-        bootcamp.BootcampStateId = (int)(request.BootcampStateId != 0 || request.BootcampStateId == null ? request.BootcampStateId : bootcamp.BootcampStateId);
+        bootcamp.Name = request.Name != "string" || request.Name != null ? request.Name : bootcamp.Name;
+        var instructorId = request.InstructorId.ToString();
+        bootcamp.InstructorId = (Guid)(instructorId != "string" || request.InstructorId != null ? request.InstructorId : bootcamp.InstructorId);
+        bootcamp.BootcampStateId = (int)(request.BootcampStateId != 0 || request.BootcampStateId != null ? request.BootcampStateId : bootcamp.BootcampStateId);
         //bootcamp.StartDate ??
         //bootcamp.EndDate ??
 

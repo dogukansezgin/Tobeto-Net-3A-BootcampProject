@@ -17,12 +17,16 @@ public class InstructorBusinessRules : BaseBusinessRules
 
     public Instructor CheckInstructorUpdate(Instructor instructor, UpdateInstructorRequest request)
     {
-        instructor.UserName = request.UserName != "string" || request.UserName == null ? request.UserName : instructor.UserName;
-        instructor.FirstName = request.FirstName != "string" || request.FirstName == null ? request.FirstName : instructor.FirstName;
-        instructor.LastName = request.LastName != "string" || request.LastName == null ? request.LastName : instructor.LastName;
-        instructor.CompanyName = request.CompanyName != "string" || request.CompanyName == null ? request.CompanyName : instructor.CompanyName;
-        instructor.NationalIdentity = request.NationalIdentity != "string" || request.NationalIdentity == null ? request.NationalIdentity : instructor.NationalIdentity;
-        instructor.Email = request.Email != "string" || request.Email == null ? request.Email : instructor.Email;
+        instructor.UserName = request.UserName != "string" || request.UserName != null ? request.UserName : instructor.UserName;
+        instructor.FirstName = request.FirstName != "string" || request.FirstName != null ? request.FirstName : instructor.FirstName;
+        instructor.LastName = request.LastName != "string" || request.LastName != null ? request.LastName : instructor.LastName;
+        instructor.CompanyName = request.CompanyName != "string" || request.CompanyName != null ? request.CompanyName : instructor.CompanyName;
+        instructor.NationalIdentity = request.NationalIdentity != "string" || request.NationalIdentity != null ? request.NationalIdentity : instructor.NationalIdentity;
+        instructor.Email = request.Email != "string" || request.Email != null ? request.Email : instructor.Email;
+        var passwordHash = request.PasswordHash.ToString();
+        instructor.PasswordHash = passwordHash != "string" || request.PasswordHash != null ? request.PasswordHash : instructor.PasswordHash;
+        var passwordSalt = request.PasswordSalt.ToString();
+        instructor.PasswordSalt = passwordSalt != "string" || request.PasswordSalt != null ? request.PasswordSalt : instructor.PasswordSalt;
         //instructor.DateOfBirth eklenecek.
 
         instructor.UpdatedDate = DateTime.UtcNow;
